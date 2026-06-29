@@ -14,8 +14,6 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      Soul2souls
-    </div>
+    <div>Soul2souls</div>
   );
 }
