@@ -9,9 +9,10 @@ import { useOffcanvas, useMediaQuery } from "./OffcanvasContext";
  * slides in. The push is desktop-only (≥768px) — on mobile there's no room for
  * perspective, so the Menu falls back to a plain slide.
  *
- * Final transform (tuned to the reference): the page scales to 0.72 and rotates
- * -8deg around Y (right edge receding, away from the incoming drawer), pivoting
- * at 35% × the viewport centre, over 500ms.
+ * Transform read directly from the live site: rotateY(30deg) around a 35%-from-
+ * left pivot plus a deep translateZ that pushes the page back through the 1000px
+ * perspective — i.e. translate3d(-9px, 0, -1344px) rotateY(30deg). Pivots at 35%
+ * × the viewport vertical centre, over 500ms.
  */
 const PUSH_QUERY = "(min-width: 768px)";
 
@@ -40,7 +41,11 @@ export function PagePusher({ children }: { children: ReactNode }) {
       <div
         style={{
           transformOrigin: `35% ${originY}px`,
-          transform: active ? "scale(0.72) rotateY(-8deg)" : "none",
+          // = translate3d(-9px, 0, -1344px) rotateY(30deg), read verbatim from
+          // the live site (pushed back through the parent's 1000px perspective).
+          transform: active
+            ? "matrix3d(0.866025, 0, -0.5, 0, 0, 1, 0, 0, 0.5, 0, 0.866025, 0, -9, 0, -1344, 1)"
+            : "none",
           transition: "transform 500ms ease",
           willChange: "transform",
         }}
