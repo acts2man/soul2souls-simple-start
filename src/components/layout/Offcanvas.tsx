@@ -200,14 +200,15 @@ export function SubscribePanel({ open, onClose }: { open: boolean; onClose: () =
 
 /* — Menu panel (template 6004) ----------------------------------------------- */
 
-// Nav list matching the live original (exactly these 5, in order). Home is a
-// real router Link; the rest stay as placeholder anchors until their routes exist.
-const MENU_ITEMS: { label: string; to: string; home: boolean }[] = [
-  { label: "Home", to: "/", home: true },
-  { label: "S2S Listeners and Supporters", to: "#", home: false },
-  { label: "Events", to: "#", home: false },
-  { label: "Presskit", to: "#", home: false },
-  { label: "Contact", to: "#", home: false },
+// Nav list matching the live original (exactly these 5, in order), wired to the
+// live URLs as router Links. /gallery-fullwidth, /events, /presskit and /contact
+// don't have routes yet, so they 404 until built — expected for now.
+const MENU_ITEMS: { label: string; to: string }[] = [
+  { label: "Home", to: "/" },
+  { label: "S2S Listeners and Supporters", to: "/gallery-fullwidth" },
+  { label: "Events", to: "/events" },
+  { label: "Presskit", to: "/presskit" },
+  { label: "Contact", to: "/contact" },
 ];
 
 const MENU_SOCIAL = [
@@ -265,20 +266,14 @@ export function MenuPanel({
               const active = pathname === item.to;
               return (
                 <li key={item.label}>
-                  {item.home ? (
-                    <Link
-                      to="/"
-                      onClick={onClose}
-                      aria-current={active ? "page" : undefined}
-                      className={linkClass}
-                    >
-                      {item.label}
-                    </Link>
-                  ) : (
-                    <a href={item.to} onClick={onClose} className={linkClass}>
-                      {item.label}
-                    </a>
-                  )}
+                  <Link
+                    to={item.to as "/"}
+                    onClick={onClose}
+                    aria-current={active ? "page" : undefined}
+                    className={linkClass}
+                  >
+                    {item.label}
+                  </Link>
                 </li>
               );
             })}
