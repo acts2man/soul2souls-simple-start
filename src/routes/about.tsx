@@ -3,6 +3,7 @@ import { SiteLayout } from "@/components/layout/SiteLayout";
 import { AboutHero } from "@/components/about/AboutHero";
 import { AboutIntro } from "@/components/about/AboutIntro";
 import { AboutOurStory } from "@/components/about/AboutOurStory";
+import { AboutMission } from "@/components/about/AboutMission";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -30,6 +31,7 @@ function About() {
       <AboutHero />
       <AboutIntro />
       <AboutOurStory />
+      <AboutMission />
     </SiteLayout>
   );
 }
