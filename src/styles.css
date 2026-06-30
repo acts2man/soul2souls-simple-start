@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+/* =============================================================================
+   Soul2SoulsJazz — design tokens extracted from the live site capture
+   Source: WordPress + Elementor 4.1.4, Sonaar theme (elementor-kit-5975).
+   See _reference/capture/ (git-ignored) for the raw export these values come from.
+   This file is the single source of truth for fonts, colors and breakpoints.
+   ========================================================================== */
+
+/* ----------------------------------------------------------------------------
+   Self-hosted fonts (copied from the capture's fonts/ folder into public/fonts/)
+   Only the weights actually loaded by the site are wired here; additional
+   weights get added as the matching page sections are built.
+   - Lato 300      → body copy (Sonaar custom-style base)
+   - Abel 400      → nav menu, off-canvas toggles, player metadata, "Follow Us"
+   - Cousine 400   → footer "Sign up" button
+   - Playfair Display 400, Oswald 400, Poppins 400 → headings / section accents
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/lato-300.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Abel";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/abel-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Cousine";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/cousine-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/playfair-display-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/oswald-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/poppins-400.woff2") format("woff2");
+}
+
+/* ----------------------------------------------------------------------------
+   Theme tokens — exposed as Tailwind utilities (bg-*, text-*, font-*, etc.)
+   -------------------------------------------------------------------------- */
+@theme {
+  /* --- Font families ------------------------------------------------------ */
+  --font-sans: "Lato", "Helvetica Neue", Arial, sans-serif; /* body default   */
+  --font-abel: "Abel", sans-serif; /* nav / accents                           */
+  --font-cousine: "Cousine", "Courier New", monospace; /* buttons             */
+  --font-playfair: "Playfair Display", Georgia, serif; /* headings            */
+  --font-oswald: "Oswald", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  /* Elementor global typography defaults (no webfont shipped on the homepage) */
+  --font-roboto: "Roboto", sans-serif;
+  --font-roboto-slab: "Roboto Slab", serif;
+
+  /* --- Brand purples (exact Elementor global + section values) ------------ */
+  --color-brand-purple: #61248d; /* e-global fb73db1 / 2f2abf53 — primary brand */
+  --color-brand-purple-alt: #61258d; /* off-canvas panel background           */
+  --color-brand-purple-dark: #491a66; /* "Follow Us" label background          */
+  --color-brand-purple-hover: #4b217f; /* footer subscribe button hover        */
+  --color-brand-deep: #2b113e; /* e-global 0f74a9f                            */
+  --color-brand-darkest: #14061e; /* e-global da92e38                         */
+  --color-brand-yellow: #ffd800; /* e-global 804b9a7                          */
+  --color-brand-yellow-bright: #fff900; /* social-icon "Lemon8" text          */
+  --color-brand-gold: #b69a00; /* e-global 0eb2a32                            */
+
+  /* --- Elementor system globals ------------------------------------------ */
+  --color-e-primary: #6ec1e4;
+  --color-e-secondary: #54595f;
+  --color-e-text: #7a7a7a;
+  --color-e-accent: #61ce70;
+  --color-e-gray: #7e828a; /* e-global b8060ea — footer muted / copyright      */
+  --color-e-light: #ececec; /* e-global 200eccd2                              */
+  --color-e-offwhite: #f9f9f9; /* e-global 6f10b4a1 — page background          */
+  --color-e-dark: #19191b; /* e-global 79a41548 — footer background            */
+  --color-e-border: #dddddd; /* e-global 3407627                              */
+
+  /* --- Shell neutrals (literal values pulled from header/footer rules) ---- */
+  --color-ink: #000000; /* body text                                          */
+  --color-ink-soft: #1a1a1a; /* theme h2 color                                */
+  --color-nav-link: #323437; /* desktop menu link color                        */
+  --color-footer-link-hover: #7bd8b4;
+  --color-input-bg: #2f2f33; /* mailchimp email field background               */
+  --color-page-bg: #f9f9f9;
+
+  /* --- Responsive breakpoints (Elementor mobile ≤767 / tablet ≤1024) ------ */
+  /* Desktop layout begins at 1025px; tablet layout at 768px.                 */
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1025px;
+
+  /* --- Layout widths ------------------------------------------------------ */
+  --container-boxed: 1230px; /* Elementor boxed section max-width              */
+}
+
+/* ----------------------------------------------------------------------------
+   shadcn/ui semantic tokens, mapped onto the Soul2Souls palette so the
+   existing component library (and the root error/404 screens) stay coherent.
+   -------------------------------------------------------------------------- */
+:root {
+  --radius: 0.5rem;
+  --background: #f9f9f9;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #61248d;
+  --primary-foreground: #ffffff;
+  --secondary: #ececec;
+  --secondary-foreground: #19191b;
+  --muted: #ececec;
+  --muted-foreground: #7e828a;
+  --accent: #61248d;
+  --accent-foreground: #ffffff;
+  --destructive: #e7515a;
+  --destructive-foreground: #ffffff;
+  --border: #dddddd;
+  --input: #dddddd;
+  --ring: #61248d;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+/* ----------------------------------------------------------------------------
+   Base layer — global element defaults matching the Sonaar theme.
+   body: Lato 300, 18px / 22px, #000 on #f9f9f9 (Sonaar custom-style.css).
+   -------------------------------------------------------------------------- */
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-width: 320px;
+    margin: 0;
+    background-color: var(--color-page-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 22px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+}
