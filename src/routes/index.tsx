@@ -3,6 +3,7 @@ import { SiteLayout } from "@/components/layout/SiteLayout";
 import { Hero } from "@/components/sections/Hero";
 import { GoLive } from "@/components/sections/GoLive";
 import { AboutShow } from "@/components/sections/AboutShow";
+import { ChartTopping } from "@/components/sections/ChartTopping";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,6 +29,7 @@ function Index() {
       <Hero />
       <GoLive />
       <AboutShow />
+      <ChartTopping />
     </SiteLayout>
   );
 }
