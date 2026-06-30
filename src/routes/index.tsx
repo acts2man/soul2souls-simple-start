@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/SiteLayout";
+import { Hero } from "@/components/sections/Hero";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <SiteLayout>
-      {/* Page sections go here — intentionally empty during foundation setup. */}
+      <Hero />
     </SiteLayout>
   );
 }
