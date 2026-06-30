@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { AboutHero } from "@/components/about/AboutHero";
+import { AboutIntro } from "@/components/about/AboutIntro";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -26,6 +27,7 @@ function About() {
   return (
     <SiteLayout>
       <AboutHero />
+      <AboutIntro />
     </SiteLayout>
   );
 }
