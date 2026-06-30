@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/SiteLayout";
+import { AboutHero } from "@/components/about/AboutHero";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -22,5 +23,9 @@ export const Route = createFileRoute("/about")({
 });
 
 function About() {
-  return <SiteLayout>{/* sections added per commit */}</SiteLayout>;
+  return (
+    <SiteLayout>
+      <AboutHero />
+    </SiteLayout>
+  );
 }
