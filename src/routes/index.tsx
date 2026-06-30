@@ -8,6 +8,7 @@ import { FeaturedMix } from "@/components/sections/FeaturedMix";
 import { Mission } from "@/components/sections/Mission";
 import { Pillars } from "@/components/sections/Pillars";
 import { AboutStory } from "@/components/sections/AboutStory";
+import { Sponsor } from "@/components/sections/Sponsor";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,6 +39,7 @@ function Index() {
       <Mission />
       <Pillars />
       <AboutStory />
+      <Sponsor />
     </SiteLayout>
   );
 }
