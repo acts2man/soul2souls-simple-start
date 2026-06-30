@@ -3,6 +3,13 @@ import { SiteLayout } from "@/components/layout/SiteLayout";
 import { Hero } from "@/components/sections/Hero";
 import { GoLive } from "@/components/sections/GoLive";
 import { AboutShow } from "@/components/sections/AboutShow";
+import { ChartTopping } from "@/components/sections/ChartTopping";
+import { FeaturedMix } from "@/components/sections/FeaturedMix";
+import { Mission } from "@/components/sections/Mission";
+import { Pillars } from "@/components/sections/Pillars";
+import { AboutStory } from "@/components/sections/AboutStory";
+import { Sponsor } from "@/components/sections/Sponsor";
+import { PlayerFeature } from "@/components/sections/PlayerFeature";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,6 +35,13 @@ function Index() {
       <Hero />
       <GoLive />
       <AboutShow />
+      <ChartTopping />
+      <FeaturedMix />
+      <Mission />
+      <Pillars />
+      <AboutStory />
+      <Sponsor />
+      <PlayerFeature />
     </SiteLayout>
   );
 }
