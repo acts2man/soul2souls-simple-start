@@ -1,6 +1,7 @@
-import type { ComponentType, SVGProps } from "react";
+import { useState, type ComponentType, type SVGProps } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { SocialLinks } from "./SocialLinks";
+import { SubscribePanel, MenuPanel, type OffcanvasPanel } from "./Offcanvas";
 import { PodcastIcon, BarsIcon } from "@/components/icons/FaIcons";
 
 /**
@@ -20,9 +21,9 @@ import { PodcastIcon, BarsIcon } from "@/components/icons/FaIcons";
  * Home and About are real SPA <Link>s with an active-route underline; the
  * remaining items stay as plain anchors until their routes exist.
  *
- * NOTE (follow-ups, not in this component): the capture's light-page header also
- * shows the Soul2Souls logo and a two-row layout, and the Subscribe/Menu
- * off-canvas panels have real content — both tracked separately.
+ * The Subscribe and Menu toggles open the two global off-canvas panels
+ * (see ./Offcanvas) via local state; the panels render once here, so they are
+ * available on every route that renders the shared header.
  */
 
 // Paths that have real routes (rendered as SPA <Link>s).
@@ -81,14 +82,17 @@ function OffcanvasToggle({
   label,
   Icon,
   dark,
+  onClick,
 }: {
   label: string;
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
   dark: boolean;
+  onClick: () => void;
 }) {
   return (
     <button
       type="button"
+      onClick={onClick}
       className={`flex items-center gap-2 ${dark ? "text-brand-purple" : "text-white"}`}
       aria-label={label}
     >
@@ -105,6 +109,11 @@ export function SiteHeader() {
   // Home overlays the dark hero (absolute, white nav); other pages are light, so
   // the header sits in flow with dark, visible nav.
   const dark = !isHome;
+
+  // Which off-canvas panel (if any) is open. Subscribe + Menu toggles drive it;
+  // the panels render once here, so they work on every route.
+  const [panel, setPanel] = useState<OffcanvasPanel | null>(null);
+  const closePanel = () => setPanel(null);
 
   return (
     <>
@@ -129,8 +138,18 @@ export function SiteHeader() {
                 <NavMenu dark={dark} pathname={pathname} />
               </nav>
               <div className="flex items-center justify-end gap-8">
-                <OffcanvasToggle label="Subscribe" Icon={PodcastIcon} dark={dark} />
-                <OffcanvasToggle label="Menu" Icon={BarsIcon} dark={dark} />
+                <OffcanvasToggle
+                  label="Subscribe"
+                  Icon={PodcastIcon}
+                  dark={dark}
+                  onClick={() => setPanel("subscribe")}
+                />
+                <OffcanvasToggle
+                  label="Menu"
+                  Icon={BarsIcon}
+                  dark={dark}
+                  onClick={() => setPanel("menu")}
+                />
               </div>
             </div>
           </div>
@@ -162,8 +181,18 @@ export function SiteHeader() {
               </nav>
               {/* Toggles column — vertically centered, right-aligned */}
               <div className="flex w-[24.719%] items-center justify-end gap-8">
-                <OffcanvasToggle label="Subscribe" Icon={PodcastIcon} dark={dark} />
-                <OffcanvasToggle label="Menu" Icon={BarsIcon} dark={dark} />
+                <OffcanvasToggle
+                  label="Subscribe"
+                  Icon={PodcastIcon}
+                  dark={dark}
+                  onClick={() => setPanel("subscribe")}
+                />
+                <OffcanvasToggle
+                  label="Menu"
+                  Icon={BarsIcon}
+                  dark={dark}
+                  onClick={() => setPanel("menu")}
+                />
               </div>
             </div>
           </div>
@@ -189,8 +218,18 @@ export function SiteHeader() {
               </Link>
             )}
             <div className="flex items-center gap-6">
-              <OffcanvasToggle label="Subscribe" Icon={PodcastIcon} dark={dark} />
-              <OffcanvasToggle label="Menu" Icon={BarsIcon} dark={dark} />
+              <OffcanvasToggle
+                label="Subscribe"
+                Icon={PodcastIcon}
+                dark={dark}
+                onClick={() => setPanel("subscribe")}
+              />
+              <OffcanvasToggle
+                label="Menu"
+                Icon={BarsIcon}
+                dark={dark}
+                onClick={() => setPanel("menu")}
+              />
             </div>
           </div>
         </div>
@@ -219,6 +258,10 @@ export function SiteHeader() {
           <SocialLinks />
         </div>
       </div>
+
+      {/* 5 — Off-canvas panels (global; wired to the toggles above) -------- */}
+      <SubscribePanel open={panel === "subscribe"} onClose={closePanel} />
+      <MenuPanel open={panel === "menu"} onClose={closePanel} pathname={pathname} />
     </>
   );
 }
