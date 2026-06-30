@@ -6,6 +6,7 @@ import { AboutShow } from "@/components/sections/AboutShow";
 import { ChartTopping } from "@/components/sections/ChartTopping";
 import { FeaturedMix } from "@/components/sections/FeaturedMix";
 import { Mission } from "@/components/sections/Mission";
+import { Pillars } from "@/components/sections/Pillars";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,6 +35,7 @@ function Index() {
       <ChartTopping />
       <FeaturedMix />
       <Mission />
+      <Pillars />
     </SiteLayout>
   );
 }
