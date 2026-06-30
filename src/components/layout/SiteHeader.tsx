@@ -1,7 +1,7 @@
-import { useState, type ComponentType, type SVGProps } from "react";
+import type { ComponentType, SVGProps } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { SocialLinks } from "./SocialLinks";
-import { SubscribePanel, MenuPanel, type OffcanvasPanel } from "./Offcanvas";
+import { useOffcanvas } from "./OffcanvasContext";
 import { PodcastIcon, BarsIcon } from "@/components/icons/FaIcons";
 
 /**
@@ -21,9 +21,9 @@ import { PodcastIcon, BarsIcon } from "@/components/icons/FaIcons";
  * Home and About are real SPA <Link>s with an active-route underline; the
  * remaining items stay as plain anchors until their routes exist.
  *
- * The Subscribe and Menu toggles open the two global off-canvas panels
- * (see ./Offcanvas) via local state; the panels render once here, so they are
- * available on every route that renders the shared header.
+ * The Subscribe and Menu toggles open the two global off-canvas panels via the
+ * OffcanvasContext; the panels themselves render at the router root (see
+ * OffcanvasLayer) so the Menu's 3D page-push can transform the page.
  */
 
 // Paths that have real routes (rendered as SPA <Link>s).
@@ -110,10 +110,9 @@ export function SiteHeader() {
   // the header sits in flow with dark, visible nav.
   const dark = !isHome;
 
-  // Which off-canvas panel (if any) is open. Subscribe + Menu toggles drive it;
-  // the panels render once here, so they work on every route.
-  const [panel, setPanel] = useState<OffcanvasPanel | null>(null);
-  const closePanel = () => setPanel(null);
+  // Subscribe + Menu toggles drive the shared off-canvas state (panels render at
+  // the router root).
+  const { setPanel } = useOffcanvas();
 
   return (
     <>
@@ -258,10 +257,6 @@ export function SiteHeader() {
           <SocialLinks />
         </div>
       </div>
-
-      {/* 5 — Off-canvas panels (global; wired to the toggles above) -------- */}
-      <SubscribePanel open={panel === "subscribe"} onClose={closePanel} />
-      <MenuPanel open={panel === "menu"} onClose={closePanel} pathname={pathname} />
     </>
   );
 }

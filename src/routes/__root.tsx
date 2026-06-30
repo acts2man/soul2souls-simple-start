@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { AudioPlayerBar } from "../components/layout/AudioPlayerBar";
+import { OffcanvasProvider } from "../components/layout/OffcanvasContext";
+import { PagePusher, OffcanvasLayer } from "../components/layout/OffcanvasLayer";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -143,11 +145,19 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
-      {/* Mounted at the root (outside <Outlet/>) so the single wavesurfer
-          instance persists and keeps playing across client-side navigation. */}
-      <AudioPlayerBar />
+      <OffcanvasProvider>
+        {/* The page lives inside the pusher so the Menu panel's 3D page-push can
+            recede/tilt it. Required: nested routes render via <Outlet />. */}
+        <PagePusher>
+          <Outlet />
+        </PagePusher>
+        {/* Off-canvas panels + purple push stage — OUTSIDE the pusher so they
+            never tilt with the page. */}
+        <OffcanvasLayer />
+        {/* Mounted at the root (outside the pusher) so the single wavesurfer
+            instance persists across navigation and the player never tilts. */}
+        <AudioPlayerBar />
+      </OffcanvasProvider>
     </QueryClientProvider>
   );
 }
