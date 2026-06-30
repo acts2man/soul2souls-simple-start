@@ -1,13 +1,10 @@
-import { SocialLinks } from "./SocialLinks";
-
 /**
  * SiteFooter — global footer (captured Sonaar/Elementor footer, template 1011).
  *
- * Structure:
+ * Structure (matches the original exactly — no social row):
  *   - Dark section (#19191b) with a centered, max-700px boxed column.
  *   - Mailing-list heading.
  *   - Inline mailchimp-style signup: pill email field + "Sign up" button.
- *   - Social row (same brand set/order/colors as the header "Follow Us" rail).
  *   - Copyright line.
  *
  * Values (colors, radii, font sizes, paddings) are taken verbatim from the
@@ -48,9 +45,6 @@ export function SiteFooter() {
               Sign up
             </button>
           </form>
-
-          {/* Social links — same brand set/order as the header rail */}
-          <SocialLinks orientation="horizontal" className="mt-12" />
 
           {/* Copyright */}
           <p className="mt-10 text-center text-[13px] uppercase tracking-[2px] text-e-gray">
