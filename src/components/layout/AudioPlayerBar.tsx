@@ -49,6 +49,17 @@ export function AudioPlayerBar() {
   const [duration, setDuration] = useState(0);
   // null = still loading; true = waveform OK; false = CORS fallback (HTML5 only)
   const [hasWaveform, setHasWaveform] = useState<boolean | null>(null);
+  // Load-entrance: parked below the viewport, then slides up ~1s after load.
+  const [entered, setEntered] = useState(false);
+
+  // Entrance animation (mirrors the capture's `.srt_sticky-player.enable`,
+  // toggled ~1s after load). This component is mounted once at the router root
+  // and never unmounts on client-side navigation, so this effect runs exactly
+  // once on initial load and does NOT replay on route changes.
+  useEffect(() => {
+    const t = setTimeout(() => setEntered(true), 1000);
+    return () => clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     if (!waveContainerRef.current) return;
@@ -154,7 +165,12 @@ export function AudioPlayerBar() {
     <div
       role="region"
       aria-label="Audio player"
-      className="fixed inset-x-0 bottom-0 z-[8010] h-[90px] border-t-2 border-brand-purple bg-black text-white"
+      // Entrance: starts parked below the viewport (translateY(100%)) and slides
+      // up to translateY(0) over 500ms ease-out once `entered` flips ~1s after
+      // load — matching the capture's `.srt_sticky-player.enable` transition.
+      className={`fixed inset-x-0 bottom-0 z-[8010] h-[90px] border-t-2 border-brand-purple bg-black text-white transition-transform duration-500 ease-out will-change-transform ${
+        entered ? "translate-y-0" : "translate-y-full"
+      }`}
     >
       <div className="mx-auto flex h-full max-w-[1600px] items-center gap-3 px-3 sm:gap-4 sm:px-4">
         {/* Circular album artwork. NOTE: the live Sonaar player is configured
