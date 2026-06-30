@@ -1,4 +1,4 @@
-import { ArrowRightCircle } from "lucide-react";
+import { ArrowCircleRightIcon } from "@/components/icons/FaIcons";
 
 /**
  * AboutStory — "— About the show" origin-story split (capture: Elementor section
@@ -31,7 +31,8 @@ export function AboutStory() {
               href="https://soul2soulsjazz.com/about-example-1/"
               className="inline-flex items-center gap-3 rounded-[30px_30px_0px_30px] font-abel text-[24px] font-extrabold uppercase tracking-[2px] text-brand-purple transition-colors hover:text-[#34144f]"
             >
-              <ArrowRightCircle className="size-7 shrink-0" aria-hidden="true" />
+              {/* Capture 7f6dc0f: fas fa-arrow-circle-right */}
+              <ArrowCircleRightIcon className="h-6 w-auto shrink-0" />
               Learn More
             </a>
           </div>

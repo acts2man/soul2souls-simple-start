@@ -1,4 +1,4 @@
-import { Mic } from "lucide-react";
+import { MicrophoneAltIcon } from "@/components/icons/FaIcons";
 
 /**
  * AboutShow — "About the Show" section (capture: Elementor section 80983a3 on
@@ -28,11 +28,8 @@ export function AboutShow() {
         <div className="tablet:mt-[60px] tablet:w-1/2">
           {/* Eyebrow: microphone icon + "About the Show" */}
           <div className="flex items-center gap-3">
-            <Mic
-              className="size-[25px] shrink-0 text-brand-purple"
-              strokeWidth={1.75}
-              aria-hidden="true"
-            />
+            {/* Capture a8bf521: fas fa-microphone-alt, #61248D, 25px */}
+            <MicrophoneAltIcon className="h-[25px] w-auto shrink-0 text-brand-purple" />
             <h2 className="font-abel text-[18px] font-bold uppercase text-black">About the Show</h2>
           </div>
 

@@ -1,4 +1,4 @@
-import { Music } from "lucide-react";
+import { MusicIcon } from "@/components/icons/FaIcons";
 
 /**
  * Hero — first content section below the header (capture: Elementor section
@@ -75,7 +75,8 @@ export function Hero() {
                 href="https://www.mixcloud.com/S2SJazz25/"
                 className="inline-flex items-center gap-[20px] rounded-[20px] bg-white px-[30px] py-[15px] font-poppins font-semibold text-black tablet:rounded-[0px_30px_30px_30px]"
               >
-                <Music className="size-5 shrink-0" aria-hidden="true" />
+                {/* Capture f5cc07e: fas fa-music */}
+                <MusicIcon className="h-5 w-auto shrink-0" />
                 <span>Join Mixcloud</span>
               </a>
             </div>

@@ -1,4 +1,4 @@
-import { Headphones, Globe, Users } from "lucide-react";
+import { HeadphonesIcon, GlobeIcon, UsersIcon } from "@/components/icons/FaIcons";
 
 /**
  * Pillars — three value props (capture: Elementor section fa1f392 on post-3050).
@@ -14,19 +14,20 @@ import { Headphones, Globe, Users } from "lucide-react";
  *   - description: body (Lato) 18px / 22px, #fff
  *   - icon→content gap 15px
  */
+// Capture fa1f392: fas fa-headphones / fa-globe / fa-users
 const PILLARS = [
   {
-    Icon: Headphones,
+    Icon: HeadphonesIcon,
     title: "Authentic",
     desc: "Every performance is crafted for both listening and dancing.",
   },
   {
-    Icon: Globe,
+    Icon: GlobeIcon,
     title: "Global",
     desc: "From New Orleans to Nigeria, Australia to California – we celebrate Jazz as a universal language that connects cultures.",
   },
   {
-    Icon: Users,
+    Icon: UsersIcon,
     title: "Community",
     desc: "Building Jazz artist awareness and listeners, creating spaces where jazz lovers gather to discover, discuss, and celebrate.",
   },
@@ -38,7 +39,8 @@ export function Pillars() {
       <div className="mx-auto grid max-w-[1230px] grid-cols-1 gap-10 tablet:grid-cols-3">
         {PILLARS.map(({ Icon, title, desc }) => (
           <div key={title} className="flex flex-col items-center gap-[15px] text-center">
-            <Icon className="size-[50px] text-brand-yellow" strokeWidth={1.75} aria-hidden="true" />
+            {/* Capture: icon gold #FFD800, 50px */}
+            <Icon className="h-[50px] w-auto text-brand-yellow" aria-hidden="true" />
             <h3 className="font-abel text-[30px] font-bold leading-[32px] text-white">{title}</h3>
             <p className="text-[18px] leading-[22px] text-white">{desc}</p>
           </div>

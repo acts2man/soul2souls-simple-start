@@ -1,5 +1,6 @@
-import { Podcast, Menu } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
 import { SocialLinks } from "./SocialLinks";
+import { PodcastIcon, BarsIcon } from "@/components/icons/FaIcons";
 
 /**
  * SiteHeader — global header / navigation.
@@ -48,10 +49,17 @@ function NavMenu() {
   );
 }
 
-function OffcanvasToggle({ label, Icon }: { label: string; Icon: typeof Podcast }) {
+function OffcanvasToggle({
+  label,
+  Icon,
+}: {
+  label: string;
+  Icon: ComponentType<SVGProps<SVGSVGElement>>;
+}) {
   return (
     <button type="button" className="flex items-center gap-2 text-white" aria-label={label}>
-      <Icon className="size-[25px]" strokeWidth={1.5} aria-hidden="true" />
+      {/* Capture: off-canvas toggle icon font-size 25px */}
+      <Icon className="h-[25px] w-auto" aria-hidden="true" />
       <span className="font-abel text-[13px] font-bold uppercase tracking-[2px]">{label}</span>
     </button>
   );
@@ -79,8 +87,8 @@ export function SiteHeader() {
               <NavMenu />
             </nav>
             <div className="flex items-center justify-end gap-8">
-              <OffcanvasToggle label="Subscribe" Icon={Podcast} />
-              <OffcanvasToggle label="Menu" Icon={Menu} />
+              <OffcanvasToggle label="Subscribe" Icon={PodcastIcon} />
+              <OffcanvasToggle label="Menu" Icon={BarsIcon} />
             </div>
           </div>
         </div>
@@ -88,8 +96,8 @@ export function SiteHeader() {
         {/* 3 — Mobile / tablet bar ----------------------------------------- */}
         <div className="desktop:hidden">
           <div className="mx-auto flex max-w-[var(--container-boxed)] items-center justify-end gap-6 px-[10px] py-4">
-            <OffcanvasToggle label="Subscribe" Icon={Podcast} />
-            <OffcanvasToggle label="Menu" Icon={Menu} />
+            <OffcanvasToggle label="Subscribe" Icon={PodcastIcon} />
+            <OffcanvasToggle label="Menu" Icon={BarsIcon} />
           </div>
         </div>
       </header>
