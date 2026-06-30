@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { AudioPlayerBar } from "../components/layout/AudioPlayerBar";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -78,17 +79,37 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Lovable App" },
-      { name: "description", content: "Soul2Souls Simple Start is a minimalist web application displaying the \"Soul2souls\" text." },
+      {
+        name: "description",
+        content:
+          'Soul2Souls Simple Start is a minimalist web application displaying the "Soul2souls" text.',
+      },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Soul2Souls Simple Start is a minimalist web application displaying the \"Soul2souls\" text." },
+      {
+        property: "og:description",
+        content:
+          'Soul2Souls Simple Start is a minimalist web application displaying the "Soul2souls" text.',
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "Soul2Souls Simple Start is a minimalist web application displaying the \"Soul2souls\" text." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5bf4e4d6-520f-406a-8666-f03b468ba708/id-preview-d3638038--9245c035-24b2-4976-a7ab-d41ed68e7922.lovable.app-1782781109416.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5bf4e4d6-520f-406a-8666-f03b468ba708/id-preview-d3638038--9245c035-24b2-4976-a7ab-d41ed68e7922.lovable.app-1782781109416.png" },
+      {
+        name: "twitter:description",
+        content:
+          'Soul2Souls Simple Start is a minimalist web application displaying the "Soul2souls" text.',
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5bf4e4d6-520f-406a-8666-f03b468ba708/id-preview-d3638038--9245c035-24b2-4976-a7ab-d41ed68e7922.lovable.app-1782781109416.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5bf4e4d6-520f-406a-8666-f03b468ba708/id-preview-d3638038--9245c035-24b2-4976-a7ab-d41ed68e7922.lovable.app-1782781109416.png",
+      },
     ],
     links: [
       {
@@ -124,6 +145,9 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      {/* Mounted at the root (outside <Outlet/>) so the single wavesurfer
+          instance persists and keeps playing across client-side navigation. */}
+      <AudioPlayerBar />
     </QueryClientProvider>
   );
 }
