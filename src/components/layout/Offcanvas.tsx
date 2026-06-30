@@ -7,20 +7,19 @@ import { InstagramIcon, TikTokIcon, YouTubeIcon, MixcloudIcon, TwitchIcon } from
  *
  * Mirrors the captured Sonaar/Elementor off-canvas panels (About capture
  * index.html):
- *   - Subscribe  → panel 7a79ce2 ("Subscribe & Follow"): purple (#61258d),
- *     550px, slide from the right. Heading + "subscribe to my podcast" + a
- *     MixCloud link box + the "Hosted by JazzAmp aka DJ Perry" photo/bio.
- *   - Menu       → panel b6293f6: light (#F9F9F9), 475px, slide from the right.
- *     Logo + the full vertical nav menu + a "Follow Us" social row.
+ *   - Subscribe → template 6132 ("Subscribe & Follow"): purple (#61258d), 550px,
+ *     plain slide from the right over a black/40 dim backdrop (sr-offcanvas-slide).
+ *   - Menu      → template 6004: light (#F9F9F9), 475px. On desktop it uses the
+ *     original's 3D page-push (sr-offcanvas-3dyatch) — the page recedes/tilts on a
+ *     purple stage (driven from the router root; see OffcanvasLayer / __root), and
+ *     the panel slides in over a transparent click-catcher. On mobile it falls
+ *     back to a plain slide over a dim backdrop (no room for perspective).
  *
- * Both panels: position fixed, slide via translateX(100%)→0 over 500ms; a black
- * backdrop fades in (capture: container:after, 500ms); close on the X button,
- * a backdrop click, or Escape; body scroll locked while open. Close button:
- * top 50px / right 20px, fill #FFFFFF (Subscribe) or #61248D (Menu), the exact
- * 32×32 "cross" glyph from the capture.
+ * Both panels: slide via translateX(100%)→0 over 500ms; close on the X button, a
+ * backdrop click, or Escape; body scroll locked while open. Close button: top
+ * 50px / right 20px, fill #FFFFFF (Subscribe) or #61248D (Menu), the exact 32×32
+ * "cross" glyph from the capture.
  */
-
-export type OffcanvasPanel = "subscribe" | "menu";
 
 // Exact close glyph from the capture (two rotated 1px rects forming an X).
 function CloseGlyph(props: { className?: string }) {
@@ -51,6 +50,7 @@ function OffcanvasShell({
   className,
   closeClassName,
   labelId,
+  backdrop,
   children,
 }: {
   open: boolean;
@@ -59,6 +59,10 @@ function OffcanvasShell({
   className: string;
   closeClassName: string;
   labelId: string;
+  // "dim" → visible black/40 overlay (Subscribe, mobile Menu). "transparent" →
+  // invisible click-catcher (desktop Menu, where the purple page-push is the
+  // backdrop). Both close on click.
+  backdrop: "dim" | "transparent";
   children: ReactNode;
 }) {
   // Escape to close + lock body scroll while open.
@@ -78,13 +82,17 @@ function OffcanvasShell({
 
   return (
     <>
-      {/* Backdrop — black 40%, 500ms fade (capture container:after). */}
+      {/* Backdrop / click-catcher. */}
       <div
         aria-hidden="true"
         onClick={onClose}
-        className={`fixed inset-0 z-[99999] bg-black/40 transition-opacity duration-500 ${
-          open ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
+        className={
+          backdrop === "dim"
+            ? `fixed inset-0 z-[99999] bg-black/40 transition-opacity duration-500 ${
+                open ? "opacity-100" : "pointer-events-none opacity-0"
+              }`
+            : `fixed inset-0 z-[99998] ${open ? "" : "pointer-events-none"}`
+        }
       />
       {/* Panel — slides in from the right over 500ms. */}
       <aside
@@ -111,7 +119,7 @@ function OffcanvasShell({
   );
 }
 
-/* — Subscribe panel (7a79ce2) ------------------------------------------------ */
+/* — Subscribe panel (template 6132) ------------------------------------------ */
 
 export function SubscribePanel({ open, onClose }: { open: boolean; onClose: () => void }) {
   return (
@@ -122,6 +130,7 @@ export function SubscribePanel({ open, onClose }: { open: boolean; onClose: () =
       className="bg-brand-purple-alt"
       closeClassName="text-white"
       labelId="offcanvas-subscribe-title"
+      backdrop="dim"
     >
       <div className="mx-auto w-full max-w-[450px] px-[15px] pb-[40px] pt-[60px]">
         {/* Subscribe & Follow — Oswald 36px/500, uppercase, lh 0.9 */}
@@ -154,9 +163,10 @@ export function SubscribePanel({ open, onClose }: { open: boolean; onClose: () =
           </a>
         </div>
 
-        {/* Hosted-by photo + name (inner 2-col). */}
-        <div className="mt-[20px] flex items-center gap-5">
-          <div className="w-1/2">
+        {/* Hosted-by photo + name. Image column is 25.781% of the inner section
+            (capture column 146587cc); text column 74.219% (159de021); 10px gap. */}
+        <div className="mt-[20px] flex items-center gap-[10px]">
+          <div className="w-[25.781%]">
             <img
               src="/images/subscribe-host.webp"
               width={500}
@@ -165,7 +175,7 @@ export function SubscribePanel({ open, onClose }: { open: boolean; onClose: () =
               className="w-full"
             />
           </div>
-          <div className="w-1/2">
+          <div className="w-[74.219%]">
             <p className="font-abel text-[12px] uppercase leading-[1.7] tracking-[0.5px] text-white">
               Hosted by
             </p>
@@ -188,19 +198,16 @@ export function SubscribePanel({ open, onClose }: { open: boolean; onClose: () =
   );
 }
 
-/* — Menu panel (b6293f6) ----------------------------------------------------- */
+/* — Menu panel (template 6004) ----------------------------------------------- */
 
-// Full nav menu from the capture. Home/About are real routes; the rest stay
-// as plain anchors (placeholder paths) until their routes exist.
-const MENU_ITEMS: { label: string; to: string; route: boolean }[] = [
-  { label: "Home", to: "/", route: true },
-  { label: "About", to: "/about", route: true },
-  { label: "Podcasts", to: "/podcasts", route: false },
-  { label: "S2S Gallery", to: "/gallery", route: false },
-  { label: "Events", to: "/events", route: false },
-  { label: "Shop", to: "/shop", route: false },
-  { label: "Presskit", to: "/presskit", route: false },
-  { label: "Contact", to: "/contact", route: false },
+// Nav list matching the live original (exactly these 5, in order). Home is a
+// real router Link; the rest stay as placeholder anchors until their routes exist.
+const MENU_ITEMS: { label: string; to: string; home: boolean }[] = [
+  { label: "Home", to: "/", home: true },
+  { label: "S2S Listeners and Supporters", to: "#", home: false },
+  { label: "Events", to: "#", home: false },
+  { label: "Presskit", to: "#", home: false },
+  { label: "Contact", to: "#", home: false },
 ];
 
 const MENU_SOCIAL = [
@@ -215,14 +222,17 @@ export function MenuPanel({
   open,
   onClose,
   pathname,
+  isDesktop,
 }: {
   open: boolean;
   onClose: () => void;
   pathname: string;
+  isDesktop: boolean;
 }) {
-  // Menu link: Lato 18px/600, #741F7E, 10px vertical padding (capture 714dd97).
+  // Menu link: #741F7E, weight 600. Mobile 32px / 12px vertical padding; desktop
+  // 18px / 10px padding (capture 714dd97 rendered values).
   const linkClass =
-    "block py-[10px] text-left font-sans text-[18px] font-semibold text-[#741F7E] transition-colors hover:text-brand-purple";
+    "block text-left font-sans text-[32px] font-semibold text-[#741F7E] py-[12px] transition-colors hover:text-brand-purple tablet:text-[18px] tablet:py-[10px]";
 
   return (
     <OffcanvasShell
@@ -232,6 +242,9 @@ export function MenuPanel({
       className="bg-[#F9F9F9]"
       closeClassName="text-brand-purple"
       labelId="offcanvas-menu-title"
+      // Desktop: the purple page-push is the backdrop → transparent catcher.
+      // Mobile: plain slide over a dim backdrop.
+      backdrop={isDesktop ? "transparent" : "dim"}
     >
       <div className="mx-auto w-full max-w-[500px] px-[15px] pb-[40px] pt-[50px]">
         {/* Logo (capture image widget d2347d5 — 51% of the column). */}
@@ -245,16 +258,16 @@ export function MenuPanel({
           />
         </Link>
 
-        {/* Full vertical nav menu. */}
+        {/* Nav menu (5 items, live order). */}
         <nav id="offcanvas-menu-title" aria-label="Site" className="mt-[30px]">
           <ul>
             {MENU_ITEMS.map((item) => {
               const active = pathname === item.to;
               return (
                 <li key={item.label}>
-                  {item.route ? (
+                  {item.home ? (
                     <Link
-                      to={item.to as "/" | "/about"}
+                      to="/"
                       onClick={onClose}
                       aria-current={active ? "page" : undefined}
                       className={linkClass}
@@ -262,7 +275,7 @@ export function MenuPanel({
                       {item.label}
                     </Link>
                   ) : (
-                    <a href={item.to} className={linkClass}>
+                    <a href={item.to} onClick={onClose} className={linkClass}>
                       {item.label}
                     </a>
                   )}
@@ -276,7 +289,7 @@ export function MenuPanel({
         <p className="mt-[40px] font-abel text-[14px] font-normal uppercase leading-none tracking-[4px] text-nav-link">
           Follow Us
         </p>
-        <ul className="mt-[15px] flex items-center gap-[12px]">
+        <ul className="mt-[15px] flex items-center gap-[5px]">
           {MENU_SOCIAL.map(({ label, href, Icon }) => (
             <li key={label}>
               <a
