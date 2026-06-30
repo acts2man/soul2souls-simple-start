@@ -120,24 +120,78 @@ export function SiteHeader() {
         </div>
 
         {/* 2 — Desktop nav row (boxed) --------------------------------------- */}
-        <div className="hidden desktop:block">
-          <div className="mx-auto grid max-w-[var(--container-boxed)] grid-cols-3 items-center px-[30px] pb-[30px] pt-[60px]">
-            <div aria-hidden="true" />
-            <nav role="navigation" aria-label="Primary" className="flex justify-center">
-              <NavMenu dark={dark} pathname={pathname} />
-            </nav>
-            <div className="flex items-center justify-end gap-8">
-              <OffcanvasToggle label="Subscribe" Icon={PodcastIcon} dark={dark} />
-              <OffcanvasToggle label="Menu" Icon={BarsIcon} dark={dark} />
+        {isHome ? (
+          // Home (template 7068): single row, no logo, white nav, over the hero.
+          <div className="hidden desktop:block">
+            <div className="mx-auto grid max-w-[var(--container-boxed)] grid-cols-3 items-center px-[30px] pb-[30px] pt-[60px]">
+              <div aria-hidden="true" />
+              <nav role="navigation" aria-label="Primary" className="flex justify-center">
+                <NavMenu dark={dark} pathname={pathname} />
+              </nav>
+              <div className="flex items-center justify-end gap-8">
+                <OffcanvasToggle label="Subscribe" Icon={PodcastIcon} dark={dark} />
+                <OffcanvasToggle label="Menu" Icon={BarsIcon} dark={dark} />
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          // Light pages (template 6598): three columns — logo (17.642%, centered),
+          // menu (56.864%, bottom-aligned, giving the "two-row" look), toggles
+          // (24.719%, centered/right). padding 60/30, margin-bottom 75px.
+          <div className="hidden desktop:block">
+            <div className="mx-auto flex max-w-[var(--container-boxed)] px-[30px] pb-[30px] pt-[60px] tablet:mb-[75px]">
+              {/* Logo column — vertically centered; image at 91.87% of the column */}
+              <div className="flex w-[17.642%] items-center">
+                <Link to="/" aria-label="Soul 2 Souls Jazz — home" className="block w-[91.87%]">
+                  <img
+                    src="/images/site-logo.webp"
+                    width={500}
+                    height={500}
+                    alt="Soul 2 Souls Jazz"
+                    className="w-full"
+                  />
+                </Link>
+              </div>
+              {/* Menu column — bottom-aligned and horizontally centered */}
+              <nav
+                role="navigation"
+                aria-label="Primary"
+                className="flex w-[56.864%] items-end justify-center"
+              >
+                <NavMenu dark={dark} pathname={pathname} />
+              </nav>
+              {/* Toggles column — vertically centered, right-aligned */}
+              <div className="flex w-[24.719%] items-center justify-end gap-8">
+                <OffcanvasToggle label="Subscribe" Icon={PodcastIcon} dark={dark} />
+                <OffcanvasToggle label="Menu" Icon={BarsIcon} dark={dark} />
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* 3 — Mobile / tablet bar ----------------------------------------- */}
         <div className="desktop:hidden">
-          <div className="mx-auto flex max-w-[var(--container-boxed)] items-center justify-end gap-6 px-[10px] py-4">
-            <OffcanvasToggle label="Subscribe" Icon={PodcastIcon} dark={dark} />
-            <OffcanvasToggle label="Menu" Icon={BarsIcon} dark={dark} />
+          <div
+            className={`mx-auto flex max-w-[var(--container-boxed)] items-center gap-6 px-[10px] py-4 ${
+              isHome ? "justify-end" : "justify-between"
+            }`}
+          >
+            {/* Light pages show the logo here too (left); home stays toggles-only. */}
+            {!isHome && (
+              <Link to="/" aria-label="Soul 2 Souls Jazz — home" className="block">
+                <img
+                  src="/images/site-logo.webp"
+                  width={500}
+                  height={500}
+                  alt="Soul 2 Souls Jazz"
+                  className="h-[64px] w-auto"
+                />
+              </Link>
+            )}
+            <div className="flex items-center gap-6">
+              <OffcanvasToggle label="Subscribe" Icon={PodcastIcon} dark={dark} />
+              <OffcanvasToggle label="Menu" Icon={BarsIcon} dark={dark} />
+            </div>
           </div>
         </div>
       </header>
