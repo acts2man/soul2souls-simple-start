@@ -9,7 +9,6 @@ import { Mission } from "@/components/sections/Mission";
 import { Pillars } from "@/components/sections/Pillars";
 import { AboutStory } from "@/components/sections/AboutStory";
 import { Sponsor } from "@/components/sections/Sponsor";
-import { PlayerFeature } from "@/components/sections/PlayerFeature";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,7 +40,6 @@ function Index() {
       <Pillars />
       <AboutStory />
       <Sponsor />
-      <PlayerFeature />
     </SiteLayout>
   );
 }

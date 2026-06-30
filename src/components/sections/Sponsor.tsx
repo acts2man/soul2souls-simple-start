@@ -20,12 +20,13 @@ export function Sponsor() {
     <>
       <section className="relative px-4 pb-[120px] pt-[20px]">
         {/* Shape-bottom divider (capture: path "M0,6V0h1000v100L0,6z", fill
-          #19191b, height 250px), anchored to the section bottom BEHIND the card
-          (flipped vertically as Elementor does for shape-bottom, so the dark is
-          tall on the left and full-width at the seam). Its dark shows around the
-          card's lower half and bleeds straight into the dark band (63e2ad6) below. */}
+          #19191b, height 250px), anchored to the section bottom BEHIND the card.
+          Elementor rotates shape-bottom 180° (transform: matrix(-1,0,0,-1,0,0)),
+          so the dark is tall on the LEFT and full-width at the seam — matching
+          the capture. It shows around the card's lower half and bleeds straight
+          into the dark band (63e2ad6) below. */}
         <svg
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 block h-[250px] w-full -scale-y-100"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 block h-[250px] w-full rotate-180"
           viewBox="0 0 1000 100"
           preserveAspectRatio="none"
           aria-hidden="true"
