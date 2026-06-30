@@ -30,10 +30,12 @@ function NavMenu() {
           <a
             href={item.href}
             aria-current={item.current ? "page" : undefined}
-            className="group relative inline-block py-[18px] font-abel text-[18px] font-normal uppercase leading-none tracking-[2px] text-nav-link transition-colors hover:text-brand-purple"
+            className="group relative inline-block py-[18px] font-abel text-[18px] font-normal uppercase leading-none tracking-[2px] text-white transition-colors"
           >
             {item.label}
-            {/* Sonaar "underline" pointer: 5px brand-purple bar revealed on hover. */}
+            {/* Sonaar "underline" pointer: 5px brand-purple bar revealed on hover.
+                Over the dark hero the link text stays white (matching the capture's
+                rendered nav); the purple bar is the active/hover indicator. */}
             <span
               className={`absolute bottom-0 left-0 h-[5px] bg-brand-purple transition-all duration-300 ${
                 item.current ? "w-full" : "w-0 group-hover:w-full"
@@ -48,7 +50,7 @@ function NavMenu() {
 
 function OffcanvasToggle({ label, Icon }: { label: string; Icon: typeof Podcast }) {
   return (
-    <button type="button" className="flex items-center gap-2 text-brand-purple" aria-label={label}>
+    <button type="button" className="flex items-center gap-2 text-white" aria-label={label}>
       <Icon className="size-[25px]" strokeWidth={1.5} aria-hidden="true" />
       <span className="font-abel text-[13px] font-bold uppercase tracking-[2px]">{label}</span>
     </button>
@@ -63,7 +65,7 @@ export function SiteHeader() {
         <div className="bg-brand-purple text-white">
           <div className="mx-auto flex max-w-[var(--container-boxed)] items-center justify-between gap-4 px-4">
             <p className="py-2 text-center text-[18px]">info@soul2soulsjazz.com</p>
-            <h2 className="hidden py-2 text-center font-abel text-[18px] font-normal tablet:block">
+            <h2 className="hidden py-2 text-center font-abel text-[18px] font-normal uppercase tablet:block">
               It&apos;s the weekennnnd baby!
             </h2>
           </div>

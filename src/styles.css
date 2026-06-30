@@ -44,6 +44,16 @@
   font-display: swap;
   src: url("/fonts/playfair-display-400.woff2") format("woff2");
 }
+/* "Playfair" is a distinct family from "Playfair Display" — the hero h1
+   (capture element b940335) uses "Playfair" at weight 800. Self-hosted as the
+   variable font so the 800 instance is available. */
+@font-face {
+  font-family: "Playfair";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/playfair-variable.woff2") format("woff2");
+}
 @font-face {
   font-family: "Oswald";
   font-style: normal;
@@ -67,7 +77,8 @@
   --font-sans: "Lato", "Helvetica Neue", Arial, sans-serif; /* body default   */
   --font-abel: "Abel", sans-serif; /* nav / accents                           */
   --font-cousine: "Cousine", "Courier New", monospace; /* buttons             */
-  --font-playfair: "Playfair Display", Georgia, serif; /* headings            */
+  --font-playfair: "Playfair", Georgia, serif; /* hero h1 (capture b940335)    */
+  --font-playfair-display: "Playfair Display", Georgia, serif; /* section heads */
   --font-oswald: "Oswald", sans-serif;
   --font-poppins: "Poppins", sans-serif;
   /* Elementor global typography defaults (no webfont shipped on the homepage) */
