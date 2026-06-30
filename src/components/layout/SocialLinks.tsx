@@ -16,7 +16,14 @@ type IconProps = SVGProps<SVGSVGElement>;
 
 function Svg({ children, ...props }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="currentColor"
+      aria-hidden="true"
+      {...props}
+    >
       {children}
     </svg>
   );
@@ -96,23 +103,14 @@ export const LEMON8_LINK = {
 } as const;
 
 /**
- * Shared social list. Colors match the captured rail exactly (white icons,
- * #ddd hover, #FFF900 Lemon8 text) regardless of placement.
+ * Vertical social list for the header "Follow Us" rail (capture element
+ * 8cb3fbd). Items are centered and stacked with a 33px gap; 24px white icons
+ * with a #ddd hover, and "Lemon8" as #FFF900 text. The purple panel chrome
+ * (background, padding, radius, shadow) is applied by the rail wrapper.
  */
-export function SocialLinks({
-  orientation = "vertical",
-  className = "",
-}: {
-  orientation?: "vertical" | "horizontal";
-  className?: string;
-}) {
-  const isVertical = orientation === "vertical";
+export function SocialLinks() {
   return (
-    <ul
-      className={`flex items-center gap-[33px] ${
-        isVertical ? "flex-col" : "flex-row flex-wrap justify-center"
-      } ${className}`}
-    >
+    <ul className="flex flex-col items-center gap-[33px]">
       {SOCIAL_LINKS.map(({ label, href, Icon }) => (
         <li key={label}>
           <a
