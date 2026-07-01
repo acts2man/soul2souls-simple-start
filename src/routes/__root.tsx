@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { AudioPlayerBar } from "../components/layout/AudioPlayerBar";
 import { OffcanvasProvider } from "../components/layout/OffcanvasContext";
 import { PagePusher, OffcanvasLayer } from "../components/layout/OffcanvasLayer";
+import { CartProvider } from "../components/cart/CartContext";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -145,19 +146,21 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <OffcanvasProvider>
-        {/* The page lives inside the pusher so the Menu panel's 3D page-push can
-            recede/tilt it. Required: nested routes render via <Outlet />. */}
-        <PagePusher>
-          <Outlet />
-        </PagePusher>
-        {/* Off-canvas panels + purple push stage — OUTSIDE the pusher so they
-            never tilt with the page. */}
-        <OffcanvasLayer />
-        {/* Mounted at the root (outside the pusher) so the single wavesurfer
-            instance persists across navigation and the player never tilts. */}
-        <AudioPlayerBar />
-      </OffcanvasProvider>
+      <CartProvider>
+        <OffcanvasProvider>
+          {/* The page lives inside the pusher so the Menu panel's 3D page-push can
+              recede/tilt it. Required: nested routes render via <Outlet />. */}
+          <PagePusher>
+            <Outlet />
+          </PagePusher>
+          {/* Off-canvas panels + purple push stage — OUTSIDE the pusher so they
+              never tilt with the page. */}
+          <OffcanvasLayer />
+          {/* Mounted at the root (outside the pusher) so the single wavesurfer
+              instance persists across navigation and the player never tilts. */}
+          <AudioPlayerBar />
+        </OffcanvasProvider>
+      </CartProvider>
     </QueryClientProvider>
   );
 }
