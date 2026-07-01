@@ -27,14 +27,14 @@ import { PodcastIcon, BarsIcon } from "@/components/icons/FaIcons";
  */
 
 // Paths that have real routes (rendered as SPA <Link>s).
-type RoutePath = "/" | "/about" | "/podcasts";
+type RoutePath = "/" | "/about" | "/podcasts" | "/contact";
 
 const NAV_ITEMS: { label: string; to: string; route: boolean }[] = [
   { label: "Home", to: "/", route: true },
   { label: "About", to: "/about", route: true },
   { label: "Podcasts", to: "/podcasts", route: true },
   { label: "Shop", to: "/shop", route: false },
-  { label: "Contact", to: "/contact", route: false },
+  { label: "Contact", to: "/contact", route: true },
 ];
 
 function NavMenu({ dark, pathname }: { dark: boolean; pathname: string }) {
