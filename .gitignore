@@ -33,3 +33,7 @@ dist-ssr
 
 # Local design reference capture (raw WordPress/Elementor export) — never commit
 _reference/
+
+# Local env (Supabase keys) — never commit; use .env.example as the template
+.env
+.env.local

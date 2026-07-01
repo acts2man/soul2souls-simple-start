@@ -2,6 +2,7 @@ import type { ComponentType, SVGProps } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { SocialLinks } from "./SocialLinks";
 import { useOffcanvas } from "./OffcanvasContext";
+import { useCart } from "@/components/cart/CartContext";
 import { PodcastIcon, BarsIcon } from "@/components/icons/FaIcons";
 
 /**
@@ -27,13 +28,13 @@ import { PodcastIcon, BarsIcon } from "@/components/icons/FaIcons";
  */
 
 // Paths that have real routes (rendered as SPA <Link>s).
-type RoutePath = "/" | "/about" | "/podcasts" | "/contact";
+type RoutePath = "/" | "/about" | "/podcasts" | "/shop" | "/contact";
 
 const NAV_ITEMS: { label: string; to: string; route: boolean }[] = [
   { label: "Home", to: "/", route: true },
   { label: "About", to: "/about", route: true },
   { label: "Podcasts", to: "/podcasts", route: true },
-  { label: "Shop", to: "/shop", route: false },
+  { label: "Shop", to: "/shop", route: true },
   { label: "Contact", to: "/contact", route: true },
 ];
 
@@ -75,6 +76,29 @@ function NavMenu({ dark, pathname }: { dark: boolean; pathname: string }) {
         );
       })}
     </ul>
+  );
+}
+
+// Cart link + item-count badge, matching the off-canvas toggle colouring
+// (brand-purple on light pages, white over the dark home hero).
+function HeaderCart({ dark }: { dark: boolean }) {
+  const { count } = useCart();
+  return (
+    <Link
+      to="/cart"
+      aria-label={`Cart, ${count} item${count === 1 ? "" : "s"}`}
+      className={`relative flex items-center ${dark ? "text-brand-purple" : "text-white"}`}
+    >
+      {/* FontAwesome solid "shopping-cart", sized like the 25px toggle icons. */}
+      <svg viewBox="0 0 576 512" className="h-[25px] w-auto" fill="currentColor" aria-hidden="true">
+        <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 416c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+      </svg>
+      {count > 0 && (
+        <span className="absolute -right-[10px] -top-[8px] flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-brand-purple px-[5px] text-[11px] font-bold leading-none text-white ring-2 ring-white">
+          {count}
+        </span>
+      )}
+    </Link>
   );
 }
 
@@ -149,6 +173,7 @@ export function SiteHeader() {
                   dark={dark}
                   onClick={() => setPanel("menu")}
                 />
+                <HeaderCart dark={dark} />
               </div>
             </div>
           </div>
@@ -192,6 +217,7 @@ export function SiteHeader() {
                   dark={dark}
                   onClick={() => setPanel("menu")}
                 />
+                <HeaderCart dark={dark} />
               </div>
             </div>
           </div>
@@ -229,6 +255,7 @@ export function SiteHeader() {
                 dark={dark}
                 onClick={() => setPanel("menu")}
               />
+              <HeaderCart dark={dark} />
             </div>
           </div>
         </div>
