@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as PresskitRouteImport } from './routes/presskit'
 import { Route as PodcastsRouteImport } from './routes/podcasts'
 import { Route as GalleryFullwidthRouteImport } from './routes/gallery-fullwidth'
 import { Route as EventsRouteImport } from './routes/events'
@@ -24,6 +25,11 @@ import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PresskitRoute = PresskitRouteImport.update({
+  id: '/presskit',
+  path: '/presskit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PodcastsRoute = PodcastsRouteImport.update({
@@ -86,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/events': typeof EventsRoute
   '/gallery-fullwidth': typeof GalleryFullwidthRoute
   '/podcasts': typeof PodcastsRoute
+  '/presskit': typeof PresskitRoute
   '/shop': typeof ShopRouteWithChildren
   '/checkout/success': typeof CheckoutSuccessRoute
   '/shop/$slug': typeof ShopSlugRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/events': typeof EventsRoute
   '/gallery-fullwidth': typeof GalleryFullwidthRoute
   '/podcasts': typeof PodcastsRoute
+  '/presskit': typeof PresskitRoute
   '/shop': typeof ShopRouteWithChildren
   '/checkout/success': typeof CheckoutSuccessRoute
   '/shop/$slug': typeof ShopSlugRoute
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/events': typeof EventsRoute
   '/gallery-fullwidth': typeof GalleryFullwidthRoute
   '/podcasts': typeof PodcastsRoute
+  '/presskit': typeof PresskitRoute
   '/shop': typeof ShopRouteWithChildren
   '/checkout/success': typeof CheckoutSuccessRoute
   '/shop/$slug': typeof ShopSlugRoute
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/events'
     | '/gallery-fullwidth'
     | '/podcasts'
+    | '/presskit'
     | '/shop'
     | '/checkout/success'
     | '/shop/$slug'
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
     | '/events'
     | '/gallery-fullwidth'
     | '/podcasts'
+    | '/presskit'
     | '/shop'
     | '/checkout/success'
     | '/shop/$slug'
@@ -154,6 +165,7 @@ export interface FileRouteTypes {
     | '/events'
     | '/gallery-fullwidth'
     | '/podcasts'
+    | '/presskit'
     | '/shop'
     | '/checkout/success'
     | '/shop/$slug'
@@ -168,6 +180,7 @@ export interface RootRouteChildren {
   EventsRoute: typeof EventsRoute
   GalleryFullwidthRoute: typeof GalleryFullwidthRoute
   PodcastsRoute: typeof PodcastsRoute
+  PresskitRoute: typeof PresskitRoute
   ShopRoute: typeof ShopRouteWithChildren
 }
 
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/presskit': {
+      id: '/presskit'
+      path: '/presskit'
+      fullPath: '/presskit'
+      preLoaderRoute: typeof PresskitRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/podcasts': {
@@ -284,6 +304,7 @@ const rootRouteChildren: RootRouteChildren = {
   EventsRoute: EventsRoute,
   GalleryFullwidthRoute: GalleryFullwidthRoute,
   PodcastsRoute: PodcastsRoute,
+  PresskitRoute: PresskitRoute,
   ShopRoute: ShopRouteWithChildren,
 }
 export const routeTree = rootRouteImport
