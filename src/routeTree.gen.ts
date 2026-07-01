@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PodcastsRouteImport } from './routes/podcasts'
+import { Route as GalleryFullwidthRouteImport } from './routes/gallery-fullwidth'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PodcastsRoute = PodcastsRouteImport.update({
   id: '/podcasts',
   path: '/podcasts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryFullwidthRoute = GalleryFullwidthRouteImport.update({
+  id: '/gallery-fullwidth',
+  path: '/gallery-fullwidth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/gallery-fullwidth': typeof GalleryFullwidthRoute
   '/podcasts': typeof PodcastsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/gallery-fullwidth': typeof GalleryFullwidthRoute
   '/podcasts': typeof PodcastsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/gallery-fullwidth': typeof GalleryFullwidthRoute
   '/podcasts': typeof PodcastsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/podcasts'
+  fullPaths: '/' | '/about' | '/gallery-fullwidth' | '/podcasts'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/podcasts'
-  id: '__root__' | '/' | '/about' | '/podcasts'
+  to: '/' | '/about' | '/gallery-fullwidth' | '/podcasts'
+  id: '__root__' | '/' | '/about' | '/gallery-fullwidth' | '/podcasts'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  GalleryFullwidthRoute: typeof GalleryFullwidthRoute
   PodcastsRoute: typeof PodcastsRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/podcasts'
       fullPath: '/podcasts'
       preLoaderRoute: typeof PodcastsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery-fullwidth': {
+      id: '/gallery-fullwidth'
+      path: '/gallery-fullwidth'
+      fullPath: '/gallery-fullwidth'
+      preLoaderRoute: typeof GalleryFullwidthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  GalleryFullwidthRoute: GalleryFullwidthRoute,
   PodcastsRoute: PodcastsRoute,
 }
 export const routeTree = rootRouteImport
