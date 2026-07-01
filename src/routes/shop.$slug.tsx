@@ -66,19 +66,25 @@ export function ProductDetailView({ slug }: { slug: string }) {
               />
             </div>
 
-            {/* Info */}
+            {/* Info — live single-product order: price → title → description →
+                quantity + add to cart → category. */}
             <div className="tablet:w-[55%]">
-              <h1 className="font-abel text-[36px] font-bold leading-[40px] text-black">
-                {product.name}
-              </h1>
-              <p className="mt-[10px] text-[24px] text-brand-purple">
+              <p className="text-[30px] leading-none text-brand-purple">
                 {formatPrice(product.priceCents)}
               </p>
 
+              <h1 className="mt-[14px] font-abel text-[34px] font-bold uppercase leading-[38px] text-black">
+                {product.name}
+              </h1>
+
+              {/* Description — omitted entirely when empty (the 3 hoodies).
+                  Data uses \n\n for paragraph breaks. */}
               {product.description && (
-                <p className="mt-[20px] text-[18px] font-light leading-[26px] text-black">
-                  {product.description}
-                </p>
+                <div className="mt-[20px] space-y-[16px] text-[18px] font-light leading-[26px] text-black">
+                  {product.description.split("\n\n").map((para, i) => (
+                    <p key={i}>{para}</p>
+                  ))}
+                </div>
               )}
 
               {/* Quantity selector */}
@@ -128,6 +134,11 @@ export function ProductDetailView({ slug }: { slug: string }) {
                   </Link>
                 </p>
               )}
+
+              {/* WooCommerce product meta. */}
+              <p className="mt-[30px] border-t border-e-border pt-[20px] text-[15px] text-e-gray">
+                Category: <span className="text-black">Uncategorized</span>
+              </p>
             </div>
           </div>
         </div>
