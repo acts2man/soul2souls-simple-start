@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PodcastsRouteImport } from './routes/podcasts'
+import { Route as GalleryFullwidthRouteImport } from './routes/gallery-fullwidth'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const PodcastsRoute = PodcastsRouteImport.update({
   id: '/podcasts',
   path: '/podcasts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryFullwidthRoute = GalleryFullwidthRouteImport.update({
+  id: '/gallery-fullwidth',
+  path: '/gallery-fullwidth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventsRoute = EventsRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
+  '/gallery-fullwidth': typeof GalleryFullwidthRoute
   '/podcasts': typeof PodcastsRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
+  '/gallery-fullwidth': typeof GalleryFullwidthRoute
   '/podcasts': typeof PodcastsRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,34 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
+  '/gallery-fullwidth': typeof GalleryFullwidthRoute
   '/podcasts': typeof PodcastsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/events' | '/podcasts'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/events'
+    | '/gallery-fullwidth'
+    | '/podcasts'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/events' | '/podcasts'
-  id: '__root__' | '/' | '/about' | '/contact' | '/events' | '/podcasts'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/events'
+    | '/gallery-fullwidth'
+    | '/podcasts'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/events'
+    | '/gallery-fullwidth'
+    | '/podcasts'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +104,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   EventsRoute: typeof EventsRoute
+  GalleryFullwidthRoute: typeof GalleryFullwidthRoute
   PodcastsRoute: typeof PodcastsRoute
 }
 
@@ -86,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/podcasts'
       fullPath: '/podcasts'
       preLoaderRoute: typeof PodcastsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery-fullwidth': {
+      id: '/gallery-fullwidth'
+      path: '/gallery-fullwidth'
+      fullPath: '/gallery-fullwidth'
+      preLoaderRoute: typeof GalleryFullwidthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/events': {
@@ -124,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   EventsRoute: EventsRoute,
+  GalleryFullwidthRoute: GalleryFullwidthRoute,
   PodcastsRoute: PodcastsRoute,
 }
 export const routeTree = rootRouteImport
