@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { PodcastsIntro } from "@/components/podcasts/PodcastsIntro";
+import { PodcastsGrid } from "@/components/podcasts/PodcastsGrid";
 
 export const Route = createFileRoute("/podcasts")({
   head: () => ({
@@ -26,6 +27,7 @@ function Podcasts() {
   return (
     <SiteLayout>
       <PodcastsIntro />
+      <PodcastsGrid />
     </SiteLayout>
   );
 }
