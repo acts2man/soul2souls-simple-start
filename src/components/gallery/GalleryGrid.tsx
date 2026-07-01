@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { galleryImages } from "@/data/gallery";
+import { GalleryLightbox } from "./GalleryLightbox";
 
 /**
  * GalleryGrid — the S2S "Listeners and Supporters" photo grid
@@ -18,26 +20,47 @@ import { galleryImages } from "@/data/gallery";
  * Rendered strictly from the ordered manifest via .map() — index 0 first,
  * index 88 last — so on-screen order === manifest order === live DOM order.
  * The first row (3) is eager; everything offscreen is loading="lazy".
+ *
+ * Clicking a photo opens the self-contained GalleryLightbox at that index; the
+ * lightbox's prev/next walk the same manifest order with wrap-around.
  */
 export function GalleryGrid() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
     <section className="mt-[20px] pb-[40px]">
       <div className="mx-auto max-w-[var(--container-boxed)] px-[10px]">
         <div className="grid grid-cols-1 items-start gap-0 min-[480px]:grid-cols-2 min-[768px]:grid-cols-3">
           {galleryImages.map((img, i) => (
-            <img
+            <button
               key={img.src}
-              src={img.src}
-              alt={img.alt}
-              width={img.width}
-              height={img.height}
-              loading={i < 3 ? "eager" : "lazy"}
-              decoding="async"
-              className="block h-auto w-full"
-            />
+              type="button"
+              onClick={() => setOpenIndex(i)}
+              aria-label={`Open image ${i + 1}: ${img.alt}`}
+              className="group block cursor-pointer overflow-hidden"
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                width={img.width}
+                height={img.height}
+                loading={i < 3 ? "eager" : "lazy"}
+                decoding="async"
+                className="block h-auto w-full transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+            </button>
           ))}
         </div>
       </div>
+
+      {openIndex !== null && (
+        <GalleryLightbox
+          images={galleryImages}
+          index={openIndex}
+          onClose={() => setOpenIndex(null)}
+          onIndexChange={setOpenIndex}
+        />
+      )}
     </section>
   );
 }
