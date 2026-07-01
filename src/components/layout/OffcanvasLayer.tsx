@@ -36,8 +36,16 @@ export function PagePusher({ children }: { children: ReactNode }) {
   return (
     // perspective lives on the parent and is only applied while pushing, so it
     // never establishes a containing block for the page's fixed elements (e.g.
-    // the "Follow Us" rail) when the menu is closed.
-    <div className="relative z-[50]" style={active ? { perspective: "1000px" } : undefined}>
+    // the "Follow Us" rail) when the menu is closed. perspective-origin must sit
+    // at the viewport centre (originY) — the wrapper is as tall as the whole
+    // page, so the default (50% 50% = centre of the tall document) would place
+    // the projection eye thousands of px down and throw the receded page out of
+    // view. The live site's perspective element is viewport-sized, so its centre
+    // already IS the viewport centre; we replicate that with an explicit origin.
+    <div
+      className="relative z-[50]"
+      style={active ? { perspective: "1000px", perspectiveOrigin: `50% ${originY}px` } : undefined}
+    >
       <div
         style={{
           transformOrigin: `35% ${originY}px`,
