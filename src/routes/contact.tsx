@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { ContactBooking } from "@/components/contact/ContactBooking";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -30,6 +31,9 @@ function Contact() {
           <div className="flex flex-col tablet:flex-row">
             <div className="px-[30px] tablet:w-[64.297%]">
               <ContactForm />
+            </div>
+            <div className="mt-[40px] px-[30px] tablet:mt-0 tablet:w-[35.703%]">
+              <ContactBooking />
             </div>
           </div>
         </div>
