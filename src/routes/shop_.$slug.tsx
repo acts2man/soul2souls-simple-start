@@ -6,7 +6,7 @@ import { PRODUCTS, formatPrice } from "@/data/shop";
 import { fetchProduct } from "@/lib/shop";
 import { useCart } from "@/components/cart/CartContext";
 
-export const Route = createFileRoute("/shop/$slug")({
+export const Route = createFileRoute("/shop_/$slug")({
   head: ({ params }) => {
     const p = PRODUCTS.find((x) => x.slug === params.slug);
     const title = p ? `${p.name} — Soul 2 Souls Jazz` : "Shop — Soul 2 Souls Jazz";
