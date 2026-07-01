@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { GalleryIntro } from "@/components/gallery/GalleryIntro";
+import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 
 export const Route = createFileRoute("/gallery-fullwidth")({
   head: () => ({
@@ -29,6 +30,7 @@ function GalleryFullwidth() {
   return (
     <SiteLayout>
       <GalleryIntro />
+      <GalleryGrid />
     </SiteLayout>
   );
 }
