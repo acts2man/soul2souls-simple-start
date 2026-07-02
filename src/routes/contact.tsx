@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactBooking } from "@/components/contact/ContactBooking";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -29,12 +30,16 @@ function Contact() {
       <section className="pt-[10px]">
         <div className="mx-auto max-w-[var(--container-boxed)] px-[10px]">
           <div className="flex flex-col tablet:flex-row">
-            <div className="px-[30px] tablet:w-[64.297%]">
-              <ContactForm />
-            </div>
-            <div className="mt-[40px] px-[30px] tablet:mt-0 tablet:w-[35.703%]">
-              <ContactBooking />
-            </div>
+            <Reveal variant="fadeInUp">
+              <div className="px-[30px] tablet:w-[64.297%]">
+                <ContactForm />
+              </div>
+            </Reveal>
+            <Reveal variant="fadeInUp" delay={150}>
+              <div className="mt-[40px] px-[30px] tablet:mt-0 tablet:w-[35.703%]">
+                <ContactBooking />
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>

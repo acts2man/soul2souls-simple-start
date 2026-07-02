@@ -9,14 +9,18 @@
  * Events: the text reads "Presskit Info Coming Soon!" and there is no
  * emoji/subtext block (Presskit is heading-only).
  */
+import { Reveal } from "@/components/motion/Reveal";
+
 export function PresskitComingSoon() {
   return (
     <section className="pt-[10px]">
       <div className="mx-auto max-w-[var(--container-boxed)] px-[10px]">
         {/* Presskit Info Coming Soon! — Abel 36px/700, centred (mirrors Events). */}
-        <h1 className="text-center font-abel text-[36px] font-bold leading-[36px] text-black">
-          Presskit Info Coming Soon!
-        </h1>
+        <Reveal variant="fadeInUp">
+          <h1 className="text-center font-abel text-[36px] font-bold leading-[36px] text-black">
+            Presskit Info Coming Soon!
+          </h1>
+        </Reveal>
       </div>
     </section>
   );

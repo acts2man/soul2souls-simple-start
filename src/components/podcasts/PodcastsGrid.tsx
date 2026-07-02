@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/Reveal";
 /**
  * PodcastsGrid — the 15 Mixcloud players (capture section 688170a).
  *
@@ -37,23 +38,25 @@ const MIX_WIDGET =
 export function PodcastsGrid() {
   return (
     <section className="mt-[60px]">
-      <div className="mx-auto flex max-w-[var(--container-boxed)] flex-col gap-[24px] px-[10px]">
-        {FEEDS.map((slug, i) => (
-          <iframe
-            key={slug}
-            title={`Soul2SoulsJazz Mixcloud player — ${slug}`}
-            width="100%"
-            height="120"
-            frameBorder="0"
-            // 15 iframes is heavy — lazy-load all but the first two.
-            {...(i >= 2 ? { loading: "lazy" as const } : {})}
-            allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
-            sandbox="allow-popups allow-top-navigation-by-user-activation allow-scripts"
-            src={`${MIX_WIDGET}${slug}%2F`}
-            className="block w-full"
-          />
-        ))}
-      </div>
+      <Reveal variant="fadeInUp">
+        <div className="mx-auto flex max-w-[var(--container-boxed)] flex-col gap-[24px] px-[10px]">
+          {FEEDS.map((slug, i) => (
+            <iframe
+              key={slug}
+              title={`Soul2SoulsJazz Mixcloud player — ${slug}`}
+              width="100%"
+              height="120"
+              frameBorder="0"
+              // 15 iframes is heavy — lazy-load all but the first two.
+              {...(i >= 2 ? { loading: "lazy" as const } : {})}
+              allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
+              sandbox="allow-popups allow-top-navigation-by-user-activation allow-scripts"
+              src={`${MIX_WIDGET}${slug}%2F`}
+              className="block w-full"
+            />
+          ))}
+        </div>
+      </Reveal>
     </section>
   );
 }

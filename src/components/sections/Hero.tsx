@@ -1,4 +1,5 @@
 import { MusicIcon } from "@/components/icons/FaIcons";
+import { Reveal } from "@/components/motion/Reveal";
 
 /**
  * Hero — first content section below the header (capture: Elementor section
@@ -47,61 +48,69 @@ export function Hero() {
         {/* Inner column panel: margin-top 90px, padding-right 40px, bg rgba(0,0,0,.3) */}
         <div className="mt-[90px] flex flex-col items-center bg-black/30 pr-[40px] text-center tablet:items-end tablet:text-start desktop:items-center desktop:text-center">
           {/* Logo (54.webp) — width 69% */}
-          <img
-            src="/images/hero-logo.webp"
-            width={851}
-            height={262}
-            alt="Soul 2 Souls — Premier Jazz"
-            className="w-[69%]"
-          />
+          <Reveal variant="fadeIn">
+            <img
+              src="/images/hero-logo.webp"
+              width={851}
+              height={262}
+              alt="Soul 2 Souls — Premier Jazz"
+              className="w-[69%]"
+            />
+          </Reveal>
 
-          {/* Heading (b940335) */}
-          <h1 className="mt-6 font-playfair text-[32px] font-extrabold leading-[1.3em] text-white">
-            Danceable Jazz – Evolving for Tomorrow
-          </h1>
+          {/* Heading (b940335) — original: fadeIn, 400ms delay */}
+          <Reveal variant="fadeIn" delay={400}>
+            <h1 className="mt-6 font-playfair text-[32px] font-extrabold leading-[1.3em] text-white">
+              Danceable Jazz – Evolving for Tomorrow
+            </h1>
+          </Reveal>
 
-          {/* Subtext (ae96050) */}
-          <div className="mt-4 font-poppins text-[16px] leading-[1.2em] tracking-[1px] tablet:text-[21px]">
-            {SUBTEXT_LINES.map((line) => (
-              <div key={line}>{line}</div>
-            ))}
-          </div>
-
-          {/* Buttons + image row (inner section 920f899) */}
-          <div className="mt-10 grid w-full grid-cols-1 items-center gap-6 tablet:grid-cols-3">
-            {/* Join Mixcloud (f5cc07e) — right-aligned on desktop */}
-            <div className="flex justify-center tablet:justify-end">
-              <a
-                href="https://www.mixcloud.com/S2SJazz25/"
-                className="inline-flex items-center gap-[20px] rounded-[20px] bg-white px-[30px] py-[15px] font-poppins font-semibold text-black tablet:rounded-[0px_30px_30px_30px]"
-              >
-                {/* Capture f5cc07e: fas fa-music */}
-                <MusicIcon className="h-5 w-auto shrink-0" />
-                <span>Join Mixcloud</span>
-              </a>
+          {/* Subtext (ae96050) — original: fadeIn, 800ms delay */}
+          <Reveal variant="fadeIn" delay={800}>
+            <div className="mt-4 font-poppins text-[16px] leading-[1.2em] tracking-[1px] tablet:text-[21px]">
+              {SUBTEXT_LINES.map((line) => (
+                <div key={line}>{line}</div>
+              ))}
             </div>
+          </Reveal>
 
-            {/* JazzAmp image (55.webp) — overflows its column in the capture */}
-            <div className="flex justify-center">
-              <img
-                src="/images/hero-jazzamp.webp"
-                width={750}
-                height={492}
-                alt="Soul 2 Souls — hosted by JazzAmp"
-                className="w-full max-w-[360px] tablet:w-[122%] tablet:max-w-none"
-              />
-            </div>
+          {/* Buttons + image row (inner section 920f899) — original: fadeInUp, 800ms */}
+          <Reveal variant="fadeInUp" delay={800}>
+            <div className="mt-10 grid w-full grid-cols-1 items-center gap-6 tablet:grid-cols-3">
+              {/* Join Mixcloud (f5cc07e) — right-aligned on desktop */}
+              <div className="flex justify-center tablet:justify-end">
+                <a
+                  href="https://www.mixcloud.com/S2SJazz25/"
+                  className="inline-flex items-center gap-[20px] rounded-[20px] bg-white px-[30px] py-[15px] font-poppins font-semibold text-black tablet:rounded-[0px_30px_30px_30px]"
+                >
+                  {/* Capture f5cc07e: fas fa-music */}
+                  <MusicIcon className="h-5 w-auto shrink-0" />
+                  <span>Join Mixcloud</span>
+                </a>
+              </div>
 
-            {/* Listen Now (7ba8208) — desktop only in the capture */}
-            <div className="hidden justify-center desktop:flex">
-              <a
-                href="https://soul2soulsjazz.com/podcasts/"
-                className="inline-flex items-center rounded-[30px_30px_0px_30px] bg-brand-gold px-[30px] py-[15px] text-center font-abel font-extrabold uppercase tracking-[2px] text-e-dark transition-colors hover:bg-[#321551] hover:text-white"
-              >
-                Listen Now to Creatively blended Mixes
-              </a>
+              {/* JazzAmp image (55.webp) — overflows its column in the capture */}
+              <div className="flex justify-center">
+                <img
+                  src="/images/hero-jazzamp.webp"
+                  width={750}
+                  height={492}
+                  alt="Soul 2 Souls — hosted by JazzAmp"
+                  className="w-full max-w-[360px] tablet:w-[122%] tablet:max-w-none"
+                />
+              </div>
+
+              {/* Listen Now (7ba8208) — desktop only in the capture */}
+              <div className="hidden justify-center desktop:flex">
+                <a
+                  href="https://soul2soulsjazz.com/podcasts/"
+                  className="inline-flex items-center rounded-[30px_30px_0px_30px] bg-brand-gold px-[30px] py-[15px] text-center font-abel font-extrabold uppercase tracking-[2px] text-e-dark transition-colors hover:bg-[#321551] hover:text-white"
+                >
+                  Listen Now to Creatively blended Mixes
+                </a>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -132,6 +132,14 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* Marks JS as active before first paint so the scroll-reveal primitive
+            can pre-hide elements without a flash. Without JS (or with reduced
+            motion) `.reveal-ready` is absent and all content renders normally. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('reveal-ready')",
+          }}
+        />
       </head>
       <body>
         {children}

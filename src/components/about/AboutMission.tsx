@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/Reveal";
 /**
  * AboutMission — "The Mission" split (capture: post-1767 section 4a42f7d). Light
  * band. Two columns: text left, image right (38.webp, 749×429). Static.
@@ -19,36 +20,40 @@ export function AboutMission() {
     <section className="px-4">
       <div className="mx-auto mt-[50px] flex max-w-[1230px] flex-col gap-10 tablet:flex-row tablet:items-center">
         {/* Text column */}
-        <div className="tablet:w-1/2">
-          <h2 className="text-center font-abel text-[36px] font-bold uppercase leading-[36px] text-black">
-            The Mission
-          </h2>
-          <h3 className="mt-2 text-center font-abel text-[22px] font-bold uppercase leading-[36px] text-black">
-            More Than Music. A Movement.
-          </h3>
+        <Reveal variant="fadeInUp">
+          <div className="tablet:w-1/2">
+            <h2 className="text-center font-abel text-[36px] font-bold uppercase leading-[36px] text-black">
+              The Mission
+            </h2>
+            <h3 className="mt-2 text-center font-abel text-[22px] font-bold uppercase leading-[36px] text-black">
+              More Than Music. A Movement.
+            </h3>
 
-          <p className="mt-8 text-[18px] text-e-gray">We exist to:</p>
-          <ul className="mt-3 list-disc space-y-3 pl-6 text-[18px] leading-[1.5] text-e-gray">
-            {POINTS.map((p) => (
-              <li key={p}>{p}</li>
-            ))}
-          </ul>
+            <p className="mt-8 text-[18px] text-e-gray">We exist to:</p>
+            <ul className="mt-3 list-disc space-y-3 pl-6 text-[18px] leading-[1.5] text-e-gray">
+              {POINTS.map((p) => (
+                <li key={p}>{p}</li>
+              ))}
+            </ul>
 
-          <blockquote className="mt-8 border-l-2 border-brand-purple pl-5 text-[18px] italic leading-[1.6] text-e-gray">
-            “It’s not just about what you hear—it’s about what you feel.” – JazzAmp aka DJ Perry
-          </blockquote>
-        </div>
+            <blockquote className="mt-8 border-l-2 border-brand-purple pl-5 text-[18px] italic leading-[1.6] text-e-gray">
+              “It’s not just about what you hear—it’s about what you feel.” – JazzAmp aka DJ Perry
+            </blockquote>
+          </div>
+        </Reveal>
 
         {/* Image column */}
-        <div className="tablet:w-1/2">
-          <img
-            src="/images/about-mission.webp"
-            width={749}
-            height={429}
-            alt="JazzAmp in the studio"
-            className="w-full"
-          />
-        </div>
+        <Reveal variant="fadeIn" delay={150}>
+          <div className="tablet:w-1/2">
+            <img
+              src="/images/about-mission.webp"
+              width={749}
+              height={429}
+              alt="JazzAmp in the studio"
+              className="w-full"
+            />
+          </div>
+        </Reveal>
       </div>
     </section>
   );

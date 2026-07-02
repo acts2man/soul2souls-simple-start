@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/Reveal";
 /**
  * AboutHero — About page title (capture: post-1767 section 23f45a6). Light band
  * (transparent → page background #f9f9f9). Static.
@@ -9,10 +10,12 @@
 export function AboutHero() {
   return (
     <section className="px-4 pt-[40px] text-center">
-      <h1 className="mt-[50px] flex flex-wrap items-center justify-center gap-3 font-abel text-[36px] font-bold uppercase leading-[34px] tracking-[4px] text-black">
-        <img src="/images/sax-emoji.svg" alt="" aria-hidden="true" className="h-[34px] w-auto" />
-        About Soul2SoulsJazz Musical Podcast
-      </h1>
+      <Reveal variant="fadeInUp">
+        <h1 className="mt-[50px] flex flex-wrap items-center justify-center gap-3 font-abel text-[36px] font-bold uppercase leading-[34px] tracking-[4px] text-black">
+          <img src="/images/sax-emoji.svg" alt="" aria-hidden="true" className="h-[34px] w-auto" />
+          About Soul2SoulsJazz Musical Podcast
+        </h1>
+      </Reveal>
       <div className="mx-auto my-[50px] h-px w-[60px] bg-black" />
     </section>
   );

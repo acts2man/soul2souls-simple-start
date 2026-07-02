@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/Reveal";
 /**
  * Sponsor — sponsorship CTA card (capture: Elementor section 4207d86 on
  * post-3050). Light band (transparent → page background #f9f9f9) with a bottom
@@ -34,38 +35,40 @@ export function Sponsor() {
           <path d="M0,6V0h1000v100L0,6z" fill="#19191b" />
         </svg>
 
-        <div className="relative z-10 mx-auto max-w-[900px]">
-          <div className="overflow-hidden rounded-[6px] bg-gradient-to-b from-[#ececec] to-[#dddddd] shadow-[0px_0px_20px_2px_rgba(126,130,138,0.5)]">
-            <div className="flex flex-col tablet:flex-row">
-              {/* Left: vintage-mic image background (capture column 95e3901) */}
-              <div
-                className="min-h-[220px] bg-[url('/images/sponsor-mic.webp')] bg-cover bg-center tablet:min-h-[360px] tablet:w-1/2"
-                aria-hidden="true"
-              />
+        <Reveal variant="fadeInUp">
+          <div className="relative z-10 mx-auto max-w-[900px]">
+            <div className="overflow-hidden rounded-[6px] bg-gradient-to-b from-[#ececec] to-[#dddddd] shadow-[0px_0px_20px_2px_rgba(126,130,138,0.5)]">
+              <div className="flex flex-col tablet:flex-row">
+                {/* Left: vintage-mic image background (capture column 95e3901) */}
+                <div
+                  className="min-h-[220px] bg-[url('/images/sponsor-mic.webp')] bg-cover bg-center tablet:min-h-[360px] tablet:w-1/2"
+                  aria-hidden="true"
+                />
 
-              {/* Right: copy */}
-              <div className="p-[30px] tablet:w-1/2">
-                <p className="font-sans text-[28px] font-extrabold uppercase leading-[34px] text-black">
-                  Would you like to become a Sponsor for our Jazz musical podcast that’s growing
-                  rapidly around the globe?
-                </p>
-                <p className="mt-[25px] text-[18px] tracking-[1px] text-black">
-                  Want{" "}
-                  <b>
-                    to be a sponsor for the Jazz show?{" "}
-                    <a
-                      href="https://soul2soulsjazz.com/contact/"
-                      className="text-brand-purple underline"
-                    >
-                      Contact Us Today
-                    </a>{" "}
-                  </b>
-                  We’ll <strong>make you shine</strong>.
-                </p>
+                {/* Right: copy */}
+                <div className="p-[30px] tablet:w-1/2">
+                  <p className="font-sans text-[28px] font-extrabold uppercase leading-[34px] text-black">
+                    Would you like to become a Sponsor for our Jazz musical podcast that’s growing
+                    rapidly around the globe?
+                  </p>
+                  <p className="mt-[25px] text-[18px] tracking-[1px] text-black">
+                    Want{" "}
+                    <b>
+                      to be a sponsor for the Jazz show?{" "}
+                      <a
+                        href="https://soul2soulsjazz.com/contact/"
+                        className="text-brand-purple underline"
+                      >
+                        Contact Us Today
+                      </a>{" "}
+                    </b>
+                    We’ll <strong>make you shine</strong>.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* Dark band below the section (capture: empty spacer section 63e2ad6 —

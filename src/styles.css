@@ -204,3 +204,56 @@
     overflow-x: hidden;
   }
 }
+
+/* ----------------------------------------------------------------------------
+   Scroll-entrance reveals — restores the original Elementor entrance motion
+   (fadeIn / fadeInUp) that eased headings, text, images and buttons in as they
+   scroll into view. Driven by the <Reveal> primitive (components/motion), which
+   tags an element with data-reveal="…" and adds .is-revealed once it enters the
+   viewport (IntersectionObserver).
+
+   No-flash + progressive-enhancement: elements are only pre-hidden once JS has
+   confirmed itself by adding `.reveal-ready` to <html> (an inline head script,
+   before first paint). Without JS — and for anyone who prefers reduced motion —
+   nothing is hidden and content renders normally.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ready [data-reveal] {
+    opacity: 0;
+  }
+  .reveal-ready [data-reveal="fadeInUp"] {
+    transform: translateY(24px);
+  }
+  .reveal-ready [data-reveal].is-revealed {
+    animation-duration: var(--reveal-duration, 0.9s);
+    animation-timing-function: cubic-bezier(0.2, 0.6, 0.2, 1);
+    animation-fill-mode: both;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal-ready [data-reveal="fadeIn"].is-revealed {
+    animation-name: s2sFadeIn;
+  }
+  .reveal-ready [data-reveal="fadeInUp"].is-revealed {
+    animation-name: s2sFadeInUp;
+  }
+}
+
+@keyframes s2sFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes s2sFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

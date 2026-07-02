@@ -1,4 +1,5 @@
 import { LongArrowRightIcon } from "@/components/icons/FaIcons";
+import { Reveal } from "@/components/motion/Reveal";
 
 /**
  * AboutCta — closing call-to-action (capture: post-1767 section ba7a213). Light
@@ -14,24 +15,26 @@ import { LongArrowRightIcon } from "@/components/icons/FaIcons";
 export function AboutCta() {
   return (
     <section className="px-4 tablet:mt-[70px] tablet:mb-[100px]">
-      <div className="mx-auto max-w-[1230px] py-12 text-center">
-        <h1 className="font-abel text-[36px] font-bold uppercase leading-[34px] tracking-[4px] text-black">
-          The Movement Continues
-        </h1>
-        <h2 className="mt-[10px] font-abel text-[18px] font-normal uppercase leading-[34px] tracking-[5px] text-black">
-          Unlock the Soul2SoulsJazz Exclusive Experience
-        </h2>
+      <Reveal variant="fadeInUp">
+        <div className="mx-auto max-w-[1230px] py-12 text-center">
+          <h1 className="font-abel text-[36px] font-bold uppercase leading-[34px] tracking-[4px] text-black">
+            The Movement Continues
+          </h1>
+          <h2 className="mt-[10px] font-abel text-[18px] font-normal uppercase leading-[34px] tracking-[5px] text-black">
+            Unlock the Soul2SoulsJazz Exclusive Experience
+          </h2>
 
-        <div className="mt-[50px] flex justify-center">
-          <a
-            href="https://soul2soulsjazz.com/contact/"
-            className="inline-flex items-center gap-[23px] rounded-[100px] bg-brand-purple px-[30px] py-[15px] text-[16px] uppercase text-white transition-colors hover:bg-[#28134c]"
-          >
-            Contact Us
-            <LongArrowRightIcon className="h-4 w-auto" />
-          </a>
+          <div className="mt-[50px] flex justify-center">
+            <a
+              href="https://soul2soulsjazz.com/contact/"
+              className="inline-flex items-center gap-[23px] rounded-[100px] bg-brand-purple px-[30px] py-[15px] text-[16px] uppercase text-white transition-colors hover:bg-[#28134c]"
+            >
+              Contact Us
+              <LongArrowRightIcon className="h-4 w-auto" />
+            </a>
+          </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
