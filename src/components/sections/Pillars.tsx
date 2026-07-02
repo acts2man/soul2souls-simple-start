@@ -1,4 +1,5 @@
 import { HeadphonesIcon, GlobeIcon, UsersIcon } from "@/components/icons/FaIcons";
+import { Reveal } from "@/components/motion/Reveal";
 
 /**
  * Pillars — three value props (capture: Elementor section fa1f392 on post-3050).
@@ -37,13 +38,15 @@ export function Pillars() {
   return (
     <section className="bg-black px-4 pb-[50px] pt-[40px] text-white">
       <div className="mx-auto grid max-w-[1230px] grid-cols-1 gap-10 tablet:grid-cols-3">
-        {PILLARS.map(({ Icon, title, desc }) => (
-          <div key={title} className="flex flex-col items-center gap-[15px] text-center">
-            {/* Capture: icon gold #FFD800, 50px */}
-            <Icon className="h-[50px] w-auto text-brand-yellow" aria-hidden="true" />
-            <h3 className="font-abel text-[30px] font-bold leading-[32px] text-white">{title}</h3>
-            <p className="text-[18px] leading-[22px] text-white">{desc}</p>
-          </div>
+        {PILLARS.map(({ Icon, title, desc }, i) => (
+          <Reveal key={title} variant="fadeInUp" delay={i * 150}>
+            <div className="flex flex-col items-center gap-[15px] text-center">
+              {/* Capture: icon gold #FFD800, 50px */}
+              <Icon className="h-[50px] w-auto text-brand-yellow" aria-hidden="true" />
+              <h3 className="font-abel text-[30px] font-bold leading-[32px] text-white">{title}</h3>
+              <p className="text-[18px] leading-[22px] text-white">{desc}</p>
+            </div>
+          </Reveal>
         ))}
       </div>
     </section>

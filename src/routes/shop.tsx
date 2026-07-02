@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { ProductCard } from "@/components/shop/ProductCard";
+import { Reveal } from "@/components/motion/Reveal";
 import { PRODUCTS } from "@/data/shop";
 import { fetchProducts } from "@/lib/shop";
 
@@ -33,17 +34,23 @@ function Shop() {
       <section className="pt-[10px]">
         <div className="mx-auto max-w-[1200px] px-[10px]">
           {/* Capture page-description heading. */}
-          <h1 className="text-center font-abel text-[42px] font-bold text-black">Coming Soon!</h1>
-          <p className="mt-[8px] text-center text-[15px] font-light text-e-gray">
-            This shop is a preview — items aren’t available for purchase yet.
-          </p>
+          <Reveal variant="fadeInUp">
+            <h1 className="text-center font-abel text-[42px] font-bold text-black">Coming Soon!</h1>
+          </Reveal>
+          <Reveal variant="fadeInUp" delay={100}>
+            <p className="mt-[8px] text-center text-[15px] font-light text-e-gray">
+              This shop is a preview — items aren’t available for purchase yet.
+            </p>
+          </Reveal>
 
           {/* WooCommerce columns-4 grid. */}
-          <div className="mt-[40px] grid grid-cols-2 gap-x-[45px] gap-y-[40px] tablet:grid-cols-4">
-            {products.map((p) => (
-              <ProductCard key={p.slug} product={p} />
-            ))}
-          </div>
+          <Reveal variant="fadeInUp" delay={150}>
+            <div className="mt-[40px] grid grid-cols-2 gap-x-[45px] gap-y-[40px] tablet:grid-cols-4">
+              {products.map((p) => (
+                <ProductCard key={p.slug} product={p} />
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
     </SiteLayout>

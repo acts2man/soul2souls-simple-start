@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/Reveal";
 /**
  * GoLive — the "Click here to go live!" band directly below the hero
  * (capture: Elementor section 18c8025 on post-3050).
@@ -26,23 +27,27 @@ export function GoLive() {
     <section className="my-[40px]">
       <div className="mx-auto flex max-w-[1230px] flex-col items-center px-4 tablet:flex-row tablet:px-[15px]">
         {/* Heading column */}
-        <div className="w-full text-center tablet:w-[53.394%] tablet:text-start">
-          <h2 className="font-abel text-[32px] font-bold uppercase leading-[45px] text-black tablet:ml-[149px]">
-            Click here to go live!
-            <br />
-            Fridays at 12pm noon CST &amp; Saturdays at 9:30pm CST
-          </h2>
-        </div>
+        <Reveal variant="fadeInUp">
+          <div className="w-full text-center tablet:w-[53.394%] tablet:text-start">
+            <h2 className="font-abel text-[32px] font-bold uppercase leading-[45px] text-black tablet:ml-[149px]">
+              Click here to go live!
+              <br />
+              Fridays at 12pm noon CST &amp; Saturdays at 9:30pm CST
+            </h2>
+          </div>
+        </Reveal>
 
         {/* CTA column */}
-        <div className="mt-6 flex w-full justify-center tablet:mt-0 tablet:w-[45.939%]">
-          <a
-            href="https://www.mixcloud.com/S2SJazz25/"
-            className="inline-block rounded-[3px] bg-brand-purple px-[30px] py-[30px] text-center font-sans text-[26px] font-semibold text-white"
-          >
-            Sign Up to Chat and Go Live!
-          </a>
-        </div>
+        <Reveal variant="fadeInUp" delay={150}>
+          <div className="mt-6 flex w-full justify-center tablet:mt-0 tablet:w-[45.939%]">
+            <a
+              href="https://www.mixcloud.com/S2SJazz25/"
+              className="inline-block rounded-[3px] bg-brand-purple px-[30px] py-[30px] text-center font-sans text-[26px] font-semibold text-white"
+            >
+              Sign Up to Chat and Go Live!
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

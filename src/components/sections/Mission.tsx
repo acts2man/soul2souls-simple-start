@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/Reveal";
 /**
  * Mission — "Our mission is simple:" band (capture: Elementor section 2b270eb on
  * post-3050). Black band. Static (no JS).
@@ -13,21 +14,23 @@
 export function Mission() {
   return (
     <section className="mt-[50px] bg-black px-4 pb-[15px] pt-[20px] text-white">
-      <div className="mx-auto max-w-[1230px] text-center">
-        <h2 className="mt-[34px] bg-gradient-to-b from-[#670093] to-brand-yellow bg-clip-text font-playfair text-[33px] leading-[1em] text-transparent tablet:text-[70px] tablet:leading-[65px]">
-          Our mission is simple:
-          <br />
-          Authentic Jazz for the Global Soul
-        </h2>
+      <Reveal variant="fadeInUp">
+        <div className="mx-auto max-w-[1230px] text-center">
+          <h2 className="mt-[34px] bg-gradient-to-b from-[#670093] to-brand-yellow bg-clip-text font-playfair text-[33px] leading-[1em] text-transparent tablet:text-[70px] tablet:leading-[65px]">
+            Our mission is simple:
+            <br />
+            Authentic Jazz for the Global Soul
+          </h2>
 
-        <p className="mx-auto mt-6 max-w-[900px] font-poppins leading-[35px] tablet:px-[150px]">
-          Amidst a world of digital beats and synthetic sounds, Soul2SoulsJazz delivers the real
-          thing – live professional performances by DJ Perry – creatively blending digital music on
-          the wheels of steel by implementing straight-ahead, danceable Jazz music with an emerging
-          Latin flair. Music that celebrates tradition while keeping the rhythm alive – celebrating
-          Jazz’s timeless essence.
-        </p>
-      </div>
+          <p className="mx-auto mt-6 max-w-[900px] font-poppins leading-[35px] tablet:px-[150px]">
+            Amidst a world of digital beats and synthetic sounds, Soul2SoulsJazz delivers the real
+            thing – live professional performances by DJ Perry – creatively blending digital music
+            on the wheels of steel by implementing straight-ahead, danceable Jazz music with an
+            emerging Latin flair. Music that celebrates tradition while keeping the rhythm alive –
+            celebrating Jazz’s timeless essence.
+          </p>
+        </div>
+      </Reveal>
     </section>
   );
 }

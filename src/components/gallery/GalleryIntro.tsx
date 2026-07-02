@@ -13,13 +13,17 @@
  *    Abel is condensed, so the title sits on one line on desktop; leading-[1.1]
  *    keeps a two-line mobile wrap legible (theme base h2 line-height is ~1em).
  */
+import { Reveal } from "@/components/motion/Reveal";
+
 export function GalleryIntro() {
   return (
     <section className="pt-[40px] pb-[10px]">
       <div className="mx-auto max-w-[var(--container-boxed)] px-[10px] text-center">
-        <h2 className="font-abel text-[37px] font-normal uppercase leading-[1.1] text-black min-[768px]:text-[55px]">
-          S2S Listeners and Supporters!
-        </h2>
+        <Reveal variant="fadeInUp">
+          <h2 className="font-abel text-[37px] font-normal uppercase leading-[1.1] text-black min-[768px]:text-[55px]">
+            S2S Listeners and Supporters!
+          </h2>
+        </Reveal>
       </div>
     </section>
   );
